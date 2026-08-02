@@ -1,0 +1,39 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://api.bizverify.co",
+      "service-desc": [
+        {
+          "href": "https://api.bizverify.co/v1/openapi.json",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://docs.bizverify.co",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://status.bizverify.co"
+        }
+      ]
+    },
+    {
+      "anchor": "https://api.bizverify.co/mcp",
+      "service-desc": [
+        {
+          "href": "https://bizverify.co/.well-known/mcp/server-card.json",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://bizverify.co/mcp/",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "tools": [
+    {
+      "name": "get_config",
+      "title": "Get Configuration",
+      "description": "Returns BizVerify's public configuration as readable text: active US and international jurisdictions, per-operation credit costs, the free-tier allowance, credit packages with pricing, feature flags, and documentation/legal links. Free and requires no authentication. Call this first to discover what"
+    },
+    {
+      "name": "list_jurisdictions",
+      "title": "List Jurisdictions",
+      "description": "Lists every registered jurisdiction with its code, active/inactive status, and supported capabilities \u2014 search, entity lookup, quick verification, and deep verification. Free and requires no authentication. Use it to confirm a state or country is supported and which verification tiers it offers befo"
+    },
+    {
+      "name": "verify_business",
+      "title": "Verify Business",
+      "description": "Confirm a specific, named business in one jurisdiction \u2014 the PRIMARY tool whenever the user wants to verify, check, confirm, or look up a company's existence, status, good standing, or details (e.g. \"verify Acme LLC in Delaware\", \"is Acme registered in FL?\", \"I need to verify a company in Delaware\")"
+    },
+    {
+      "name": "search_entities",
+      "title": "Search Entities",
+      "description": "Discover candidate businesses when the exact entity is UNKNOWN \u2014 a listing/discovery tool, NOT a verification tool. Use only when the user wants to browse or list multiple companies matching a partial or fuzzy name, or does not yet know which specific entity they mean. If the user can name one speci"
+    },
+    {
+      "name": "check_job_status",
+      "title": "Check Job Status",
+      "description": "Poll a long-running (async) verification job created by verify_business. Returns the full verification result once complete, a failure reason if it failed, or a \"still processing\" status to poll again. Free \u2014 no credits charged \u2014 but requires authentication. Pass the job_id from the verify_business "
+    },
+    {
+      "name": "get_entity",
+      "title": "Get Entity",
+      "description": "Fetch a previously verified business entity from BizVerify's cache by its ID \u2014 returns name, jurisdiction, status, type, good-standing, formation date, registered agent, and the number of snapshots on record. Free and read-only; does NOT fetch a fresh live result (use verify_business with force_refr"
+    },
+    {
+      "name": "get_entity_history",
+      "title": "Get Entity History",
+      "description": "Returns the chronological verification snapshots recorded for an entity \u2014 each with a timestamp, name, and status \u2014 newest first, with pagination. Costs 5 credits and requires authentication. Use it to see how a company's status or details have changed over time."
+    },
+    {
+      "name": "get_account",
+      "title": "Get Account",
+      "description": "Returns your BizVerify account summary: email and verification status, plan, current credit balance, member-since date, and your active and revoked API keys. Free and read-only; requires authentication. Use it to check your remaining credit balance before running paid verifications."
+    },
+    {
+      "name": "purchase_credits",
+      "title": "Purchase Credits",
+      "description": "Starts a credit purchase: creates a Stripe checkout session for the chosen package and returns a payment URL to present to the user. Does NOT charge immediately and does NOT add credits until the user completes payment \u2014 credits are then added automatically. Requires authentication. Packages: credit"
+    }
+  ]
+}

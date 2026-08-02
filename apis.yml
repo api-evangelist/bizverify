@@ -1,0 +1,122 @@
+name: BizVerify
+description: >-
+  BizVerify is a business entity verification (KYB) API built for AI agents as much as for
+  developers. It confirms business registrations, status, good standing and available public
+  company details across supported US and international jurisdictions, through a REST API and a
+  hosted MCP server that exposes the same capability as nine tools. The agent surface is the
+  unusual part for a provider this size: alongside the OpenAPI it publishes an llms.txt, a proper
+  RFC 9727 API catalog served as application/linkset+json, per-vendor tool manifests at
+  /tools/openai.json and /tools/anthropic.json, and an open-source MCP client repository. Access is
+  credit-based with a free-tier allowance, and the MCP server answers tools/list without
+  credentials.
+url: https://bizverify.apievangelist.com/apis.yml
+created: '2026-08-02'
+modified: '2026-08-02'
+specificationVersion: '0.21'
+tags:
+  - Business Verification
+  - KYB
+  - Know Your Business
+  - Entity Verification
+  - Compliance
+  - MCP
+  - Agent-native
+  - Developer Tools
+apis:
+  - name: BizVerify API
+    description: >-
+      REST API for business entity verification. 21 operations across 20 paths covering
+      verification submission and job status, entity lookup and history, jurisdiction discovery,
+      account and credit management, and access-request auth. OpenAPI 3.0.3. Authenticates with an
+      API key in the X-API-Key header or a bearer token.
+    humanURL: https://docs.bizverify.co
+    baseURL: https://api.bizverify.co
+    tags:
+      - Business Verification
+      - KYB
+      - Entity Verification
+      - Compliance
+    properties:
+      - type: OpenAPI
+        url: openapi/bizverify-openapi.json
+      - type: OpenAPI
+        url: https://api.bizverify.co/v1/openapi.json
+      - type: Documentation
+        url: https://docs.bizverify.co
+      - type: SignUp
+        url: https://bizverify.co
+  - name: BizVerify MCP Server
+    description: >-
+      Hosted MCP server over Streamable HTTP exposing nine tools — get_config,
+      list_jurisdictions, verify_business, search_entities, check_job_status, get_entity,
+      get_entity_history, get_account and purchase_credits. Discovery is public: tools/list answers
+      without credentials. An open-source client repository is published separately.
+    humanURL: https://github.com/BizVerify/bizverify-mcp
+    baseURL: https://api.bizverify.co/mcp
+    tags:
+      - MCP
+      - Agent-native
+      - Business Verification
+      - KYB
+    properties:
+      - type: MCP
+        url: https://api.bizverify.co/mcp
+      - type: MCPTools
+        url: mcp/bizverify-mcp-tools.json
+      - type: SourceCode
+        url: https://github.com/BizVerify/bizverify-mcp
+common:
+  - type: Website
+    url: https://bizverify.co
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: LLMSTxt
+    url: llms/bizverify-llms.txt
+  - type: LLMSTxt
+    url: https://bizverify.co/llms.txt
+  - type: APICatalog
+    url: well-known/bizverify-api-catalog.json
+  - type: APICatalog
+    url: https://bizverify.co/.well-known/api-catalog
+  - type: AgentSkills
+    url: https://api.bizverify.co/tools/openai.json
+  - type: AgentSkills
+    url: https://api.bizverify.co/tools/anthropic.json
+  - type: PrivacyPolicy
+    url: https://bizverify.co/privacy
+  - type: TermsOfService
+    url: https://bizverify.co/terms
+maintainers:
+  - FN: BizVerify
+    url: https://bizverify.co
+x-evidence:
+  harvested: '2026-08-02'
+  request: api-search/inbox#1
+  probes:
+    - https://api.bizverify.co/v1/openapi.json -> HTTP 200, OpenAPI 3.0.3, 20 paths / 21 ops
+    - https://bizverify.co/llms.txt -> HTTP 200, 5,871 bytes, text/plain
+    - https://bizverify.co/.well-known/api-catalog -> HTTP 200, application/linkset+json, 808 bytes
+    - https://api.bizverify.co/mcp tools/list -> HTTP 200, 9 tools, no credentials required
+    - https://api.bizverify.co/tools/openai.json -> HTTP 200
+    - https://api.bizverify.co/tools/anthropic.json -> HTTP 200
+    - https://docs.bizverify.co, /privacy, /terms -> HTTP 200
+    - https://bizverify.co/this-does-not-exist-xyz789 -> HTTP 404, 0 bytes (no catch-all; the 200s above are real)
+  defects_found:
+    empty_servers: >-
+      The published OpenAPI declares `servers: []`. Nothing in the document says the API is served
+      from https://api.bizverify.co, so it is not callable as published. The baseURL recorded here
+      comes from the API catalog linkset and from the live host, not from the spec.
+    no_schemas: >-
+      21 operations and zero `components.schemas`. Request and response bodies are undescribed,
+      which is the single largest gap in the contract and the highest-leverage thing to fix.
+    user_agent_gate: >-
+      https://api.bizverify.co/v1/openapi.json returns HTTP 403 to a default Python client
+      (`Python-urllib/3.14`) while returning 200 to curl and to an empty user-agent. Any automated
+      consumer using a stock library UA is blocked. Harvested here with curl; a pipeline using
+      requests/urllib defaults would record nothing and silently understate them.
+  note: >-
+    Built from the provider's own published artifacts, all fetched and measured. The MCP property
+    is emitted because the server is hosted and answers tools/list unauthenticated — unlike a
+    local-stdio install, which is described in prose only. Pricing is credit-based with a free
+    tier per the MCP get_config tool, but no machine-readable rate card was found, so plans and
+    rate limits are not asserted.

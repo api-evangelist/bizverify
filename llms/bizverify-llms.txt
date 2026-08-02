@@ -1,0 +1,45 @@
+# BizVerify
+
+> Business entity verification API. Verify a company's registration, status, and good standing across US states and the UK via REST or MCP. Returns the current official record on every call, billed per call.
+
+## Product
+- [Home](https://bizverify.co/): What BizVerify does, pricing, and coverage
+- [MCP server](https://bizverify.co/mcp/): Connect via Claude, Cursor, or any MCP client
+- [Agent integrations](https://bizverify.co/agents/): n8n, OpenAI, Anthropic, LangChain, CrewAI
+
+## Verify by jurisdiction
+- [Coverage hub](https://bizverify.co/verify/): Every jurisdiction covered, with the verification depth available in each
+- [United Kingdom](https://bizverify.co/verify/gb/): Verify UK companies via API with live Companies House data — status, officers, beneficial owners (PSC), and filing history, normalized for KYB and agents.
+- [Alabama](https://bizverify.co/verify/us-al/): Alabama business verification API. Verify AL LLCs and corporations against the Secretary of State record — status Exists, officers, registered agent, live.
+- [California](https://bizverify.co/verify/us-ca/): California business verification API. Verify CA LLCs and corporations in real time — name, type, entity number, status, and deep verification.
+- [Colorado](https://bizverify.co/verify/us-co/): Colorado business verification API. Verify CO LLCs and corporations in real time — entity name, type, 11-digit ID, and status from the Colorado SOS.
+- [Delaware](https://bizverify.co/verify/us-de/): Verify Delaware LLCs, corporations, and statutory trusts via API. Real-time entity name, type, and status lookups from the Division of Corporations.
+- [Florida](https://bizverify.co/verify/us-fl/): Florida business verification API. Verify FL LLCs and corporations against the Division of Corporations (Sunbiz) status, document number, and officers.
+- [Idaho](https://bizverify.co/verify/us-id/): Idaho business verification API. Verify ID LLCs and corporations against the Idaho Secretary of State — current status and file number in one call.
+- [Kentucky](https://bizverify.co/verify/us-ky/): Kentucky business verification API. Verify KY LLCs and corporations — status plus the good-standing flag from the Kentucky Secretary of State.
+- [Massachusetts](https://bizverify.co/verify/us-ma/): Massachusetts business verification API. Verify MA LLCs and corporations against the live Corporations Division record — normalized status, no cached data.
+- [Maine](https://bizverify.co/verify/us-me/): Maine business verification API. Verify ME corporations and LLCs against the live Division of Corporations record — charter number, filing type, status.
+- [Missouri](https://bizverify.co/verify/us-mo/): Missouri business verification API. Verify MO LLCs and corporations — status and Charter Number from the Missouri Secretary of State, fresh on every call.
+- [North Dakota](https://bizverify.co/verify/us-nd/): North Dakota business verification API. Verify ND LLCs and corporations against the Secretary of State register — entity type, status, and Good Standing.
+- [New Jersey](https://bizverify.co/verify/us-nj/): New Jersey business verification API. Verify NJ LLCs and corporations in real time — entity name, type, 10-digit Entity ID, and status from DORES.
+- [Nevada](https://bizverify.co/verify/us-nv/): Verify Nevada LLCs and corporations via API. Real-time entity name, type, and status lookups from the Secretary of State's SilverFlume registry.
+- [New York](https://bizverify.co/verify/us-ny/): New York business verification API. Verify NY LLCs and corporations in real time — entity name, type, DOS ID, and status from the Department of State.
+- [Oregon](https://bizverify.co/verify/us-or/): Oregon business verification API. Verify OR LLCs, corporations, and assumed business names against the Secretary of State register by registry number.
+- [Rhode Island](https://bizverify.co/verify/us-ri/): Rhode Island business verification API. Verify RI LLCs and corporations against the Department of State corporate database, with live status on every call.
+- [South Carolina](https://bizverify.co/verify/us-sc/): South Carolina business verification API. Check SC LLCs and corporations against the Secretary of State record — Good Standing status, live on every call.
+- [Texas](https://bizverify.co/verify/us-tx/): Texas business verification API. Verify TX LLCs and corporations against the Comptroller's right-to-transact status and Secretary of State register.
+- [Wisconsin](https://bizverify.co/verify/us-wi/): Wisconsin business verification API. Verify WI LLCs and corporations against DFI's CRIS — status plus good_standing, so delinquent entities are visible.
+- [Wyoming](https://bizverify.co/verify/us-wy/): Verify Wyoming LLCs and corporations via API. Real-time entity name, type, and status lookups from the Secretary of State's free WyoBiz registry.
+
+## Agent integrations
+- [n8n](https://bizverify.co/agents/n8n/): Nine BizVerify operations on one n8n node — not nine HTTP nodes wired together.
+- [OpenAI](https://bizverify.co/agents/openai/): Tool definitions live at api.bizverify.co/tools/openai.json. One fetch, no schema maintenance.
+- [Anthropic](https://bizverify.co/agents/anthropic/): Tool definitions live at api.bizverify.co/tools/anthropic.json. Drop into anthropic.messages.create unchanged.
+- [LangChain](https://bizverify.co/agents/langchain/): Native BaseTool wrappers. BizVerifyTools().get_tools() drops straight into create_react_agent.
+- [CrewAI](https://bizverify.co/agents/crewai/): Native CrewAI tool wrappers. Hand BizVerifyTools().get_tools() to any Agent in your crew.
+
+## Docs & policies
+- [API documentation](https://docs.bizverify.co)
+- [Acceptable use](https://bizverify.co/acceptable-use/)
+- [Terms of service](https://bizverify.co/terms/)
+- [Privacy policy](https://bizverify.co/privacy/)
