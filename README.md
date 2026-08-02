@@ -25,8 +25,9 @@ Recorded in `apis.yml` under `x-evidence.defects_found`, and reported to the pro
   URL here comes from the API catalog linkset and the live host.
 - **No schemas** — 21 operations with no `components.schemas`, so request and response bodies are
   undescribed.
-- **User-agent gate** — the spec returns HTTP 403 to a default Python client while serving curl
-  normally. Automated consumers using a stock library UA are blocked.
+- **User-agent gate** — the spec returns HTTP 403 to `Python-urllib` while serving curl, an empty
+  UA, and `python-requests` normally. Narrow, but enough to silently starve a urllib-based
+  harvester.
 
 ## This is a catalog entry, not BizVerify
 

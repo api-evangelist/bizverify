@@ -110,10 +110,11 @@ x-evidence:
       21 operations and zero `components.schemas`. Request and response bodies are undescribed,
       which is the single largest gap in the contract and the highest-leverage thing to fix.
     user_agent_gate: >-
-      https://api.bizverify.co/v1/openapi.json returns HTTP 403 to a default Python client
-      (`Python-urllib/3.14`) while returning 200 to curl and to an empty user-agent. Any automated
-      consumer using a stock library UA is blocked. Harvested here with curl; a pipeline using
-      requests/urllib defaults would record nothing and silently understate them.
+      https://api.bizverify.co/v1/openapi.json returns HTTP 403 to `Python-urllib/3.14` while
+      returning 200 to curl, to an empty user-agent, and to `python-requests/2.32.3`. So the block
+      is specific to urllib rather than to automated clients generally — narrower than it first
+      appeared, but still enough to silently starve any harvester built on urllib, which would
+      record nothing and understate the provider. Harvested here with curl.
   note: >-
     Built from the provider's own published artifacts, all fetched and measured. The MCP property
     is emitted because the server is hosted and answers tools/list unauthenticated — unlike a
