@@ -59,7 +59,7 @@ apis:
       - Business Verification
       - KYB
     properties:
-      - type: MCP
+      - type: MCPServer
         url: https://api.bizverify.co/mcp
       - type: MCPTools
         url: mcp/bizverify-mcp-tools.json
