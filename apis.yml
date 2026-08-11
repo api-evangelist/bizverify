@@ -23,49 +23,158 @@ tags:
   - Agent-native
   - Developer Tools
 apis:
-  - name: BizVerify API
-    description: >-
-      REST API for business entity verification. 21 operations across 20 paths covering
-      verification submission and job status, entity lookup and history, jurisdiction discovery,
-      account and credit management, and access-request auth. OpenAPI 3.0.3. Authenticates with an
-      API key in the X-API-Key header or a bearer token.
-    humanURL: https://docs.bizverify.co
-    baseURL: https://api.bizverify.co
-    tags:
-      - Business Verification
-      - KYB
-      - Entity Verification
-      - Compliance
-    properties:
-      - type: OpenAPI
-        url: openapi/bizverify-openapi.json
-      - type: OpenAPI
-        url: https://api.bizverify.co/v1/openapi.json
-      - type: Documentation
-        url: https://docs.bizverify.co
-      - type: SignUp
-        url: https://bizverify.co
-  - name: BizVerify MCP Server
-    description: >-
-      Hosted MCP server over Streamable HTTP exposing nine tools — get_config,
-      list_jurisdictions, verify_business, search_entities, check_job_status, get_entity,
-      get_entity_history, get_account and purchase_credits. Discovery is public: tools/list answers
-      without credentials. An open-source client repository is published separately.
-    humanURL: https://github.com/BizVerify/bizverify-mcp
-    baseURL: https://api.bizverify.co/mcp
-    tags:
-      - MCP
-      - Agent-native
-      - Business Verification
-      - KYB
-    properties:
-      - type: MCPServer
-        url: https://api.bizverify.co/mcp
-      - type: MCPTools
-        url: mcp/bizverify-mcp-tools.json
-      - type: SourceCode
-        url: https://github.com/BizVerify/bizverify-mcp
+- name: BizVerify MCP Server
+  description: >-
+    Hosted MCP server over Streamable HTTP exposing nine tools — get_config, list_jurisdictions, verify_business,
+    search_entities, check_job_status, get_entity, get_entity_history, get_account and purchase_credits.
+    Discovery is public: tools/list answers without credentials. An open-source client repository is published
+    separately.
+  humanURL: https://github.com/BizVerify/bizverify-mcp
+  baseURL: https://api.bizverify.co/mcp
+  tags:
+  - MCP
+  - Agent-native
+  - Business Verification
+  - KYB
+  properties:
+  - type: MCPServer
+    url: https://api.bizverify.co/mcp
+  - type: MCPTools
+    url: mcp/bizverify-mcp-tools.json
+  - type: SourceCode
+    url: https://github.com/BizVerify/bizverify-mcp
+- aid: bizverify:bizverify-account-api
+  name: BizVerify Account API
+  description: The Account API from BizVerify — 5 operation(s) for account.
+  humanURL: https://docs.bizverify.co
+  baseURL: https://api.bizverify.co
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/bizverify-account-api-openapi.yml
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: SignUp
+    url: https://bizverify.co
+- aid: bizverify:bizverify-auth-api
+  name: BizVerify Auth API
+  description: The Auth API from BizVerify — 2 operation(s) for auth.
+  humanURL: https://docs.bizverify.co
+  baseURL: https://api.bizverify.co
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/bizverify-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: SignUp
+    url: https://bizverify.co
+- aid: bizverify:bizverify-billing-api
+  name: BizVerify Billing API
+  description: The Billing API from BizVerify — 2 operation(s) for billing.
+  humanURL: https://docs.bizverify.co
+  baseURL: https://api.bizverify.co
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/bizverify-billing-api-openapi.yml
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: SignUp
+    url: https://bizverify.co
+- aid: bizverify:bizverify-entities-api
+  name: BizVerify Entities API
+  description: The Entities API from BizVerify — 2 operation(s) for entities.
+  humanURL: https://docs.bizverify.co
+  baseURL: https://api.bizverify.co
+  tags:
+  - Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/bizverify-entities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: SignUp
+    url: https://bizverify.co
+- aid: bizverify:bizverify-meta-api
+  name: BizVerify Meta API
+  description: The Meta API from BizVerify — 2 operation(s) for meta.
+  humanURL: https://docs.bizverify.co
+  baseURL: https://api.bizverify.co
+  tags:
+  - Meta
+  properties:
+  - type: OpenAPI
+    url: openapi/bizverify-meta-api-openapi.yml
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: SignUp
+    url: https://bizverify.co
+- aid: bizverify:bizverify-public-api
+  name: BizVerify Public API
+  description: The Public API from BizVerify — 2 operation(s) for public.
+  humanURL: https://docs.bizverify.co
+  baseURL: https://api.bizverify.co
+  tags:
+  - Public
+  properties:
+  - type: OpenAPI
+    url: openapi/bizverify-public-api-openapi.yml
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: SignUp
+    url: https://bizverify.co
+- aid: bizverify:bizverify-search-api
+  name: BizVerify Search API
+  description: The Search API from BizVerify — 1 operation(s) for search.
+  humanURL: https://docs.bizverify.co
+  baseURL: https://api.bizverify.co
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/bizverify-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: SignUp
+    url: https://bizverify.co
+- aid: bizverify:bizverify-tools-api
+  name: BizVerify Tools API
+  description: The Tools API from BizVerify — 2 operation(s) for tools.
+  humanURL: https://docs.bizverify.co
+  baseURL: https://api.bizverify.co
+  tags:
+  - Tools
+  properties:
+  - type: OpenAPI
+    url: openapi/bizverify-tools-api-openapi.yml
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: SignUp
+    url: https://bizverify.co
+- aid: bizverify:bizverify-verification-api
+  name: BizVerify Verification API
+  description: The Verification API from BizVerify — 2 operation(s) for verification.
+  humanURL: https://docs.bizverify.co
+  baseURL: https://api.bizverify.co
+  tags:
+  - Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/bizverify-verification-api-openapi.yml
+  - type: Documentation
+    url: https://docs.bizverify.co
+  - type: SignUp
+    url: https://bizverify.co
 common:
+  - type: IssueTracker
+    url: https://github.com/BizVerify/bizverify-mcp/issues
+  - type: License
+    name: MIT
+    url: https://github.com/BizVerify/bizverify-mcp/blob/main/LICENSE
   - type: Website
     url: https://bizverify.co
   - type: Documentation
