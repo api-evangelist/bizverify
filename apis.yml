@@ -9,7 +9,7 @@ description: >-
   /tools/openai.json and /tools/anthropic.json, and an open-source MCP client repository. Access is
   credit-based with a free-tier allowance, and the MCP server answers tools/list without
   credentials.
-url: https://bizverify.apievangelist.com/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/bizverify/refs/heads/main/apis.yml
 created: '2026-08-02'
 modified: '2026-08-02'
 specificationVersion: '0.21'
