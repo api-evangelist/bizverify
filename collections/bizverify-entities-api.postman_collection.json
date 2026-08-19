@@ -1,0 +1,398 @@
+{
+  "item": [
+    {
+      "id": "288a621a-cdc0-4231-a5eb-63a496377e1a",
+      "name": "Entities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f5c97a8d-5027-4d7e-8428-4008f3bd9b1b",
+          "name": "get Entity",
+          "request": {
+            "name": "get Entity",
+            "description": {
+              "content": "Get a cached entity by ID. Returns the most recent verification data for the entity. Entity IDs are returned by POST /v1/verify and POST /v1/search. No credits charged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "entity",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) The entity ID returned from a verification or search"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "36562545-bca2-42a9-9d4b-1e18731fe08b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "entity",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) The entity ID returned from a verification or search"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"jurisdiction\": \"string\",\n  \"jurisdiction_id\": \"string\",\n  \"entity_name\": \"string\",\n  \"entity_type\": \"lp\",\n  \"status\": \"inactive\",\n  \"good_standing\": true,\n  \"formation_date\": \"string\",\n  \"registered_agent\": {\n    \"name\": \"string\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": null,\n      \"city\": \"string\",\n      \"state\": null,\n      \"postal_code\": null,\n      \"country\": \"string\"\n    }\n  },\n  \"officers\": [\n    {\n      \"name\": \"string\",\n      \"title\": \"string\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": null,\n        \"city\": \"string\",\n        \"state\": null,\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"title\": \"string\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": null,\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": null,\n        \"country\": \"string\"\n      }\n    }\n  ],\n  \"principal_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": null,\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"filing_history_summary\": [\n    {\n      \"date\": \"string\",\n      \"type\": \"string\",\n      \"description\": null\n    },\n    {\n      \"date\": \"string\",\n      \"type\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"last_verified_at\": null,\n  \"snapshots\": 5784.397940899188,\n  \"created_at\": \"string\",\n  \"updated_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bb173fb-d8da-4778-9696-19b80bb116fe",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "entity",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) The entity ID returned from a verification or search"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36d3c559-8ff1-4b01-bc97-79efe5423e96",
+          "name": "get Entity History",
+          "request": {
+            "name": "get Entity History",
+            "description": {
+              "content": "Get historical verification snapshots for an entity, ordered by most recent first. Each snapshot represents a point-in-time verification result. Charges 5 credits per request. Supports pagination via limit and offset query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "entity",
+                ":entityId",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) The entity ID returned from a verification or search"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b4475171-5472-4473-ac7d-f1cab3df31b4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "entity",
+                    ":entityId",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) The entity ID returned from a verification or search"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"snapshots\": [],\n  \"total\": 6978.095059395505,\n  \"limit\": 1040.0024866886504,\n  \"offset\": 7548.773902216333\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5b4eaec-0955-4dbc-bcdf-922de63d35d3",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "entity",
+                    ":entityId",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) The entity ID returned from a verification or search"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5e822fc4-a8b6-4a42-9353-b322981584f8",
+    "name": "BizVerify Entities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.",
+      "type": "text/plain"
+    }
+  }
+}

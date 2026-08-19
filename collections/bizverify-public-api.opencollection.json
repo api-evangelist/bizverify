@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BizVerify Public API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Public",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/config"
+          },
+          "docs": "Get public configuration including supported jurisdictions, credit pricing, available features, and API status. No authentication required. Use this to discover supported jurisdictions and understand credit costs before making API calls."
+        },
+        {
+          "info": {
+            "name": "getOpenApiSpec",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/openapi.json"
+          },
+          "docs": "Download the OpenAPI 3.1 specification as JSON. Use this to generate client SDKs or explore the API schema programmatically."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

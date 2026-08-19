@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BizVerify Entities API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getEntity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/entity/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The entity ID returned from a verification or search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a cached entity by ID. Returns the most recent verification data for the entity. Entity IDs are returned by POST /v1/verify and POST /v1/search. No credits charged."
+        },
+        {
+          "info": {
+            "name": "getEntityHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/entity/:entityId/history",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The entity ID returned from a verification or search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get historical verification snapshots for an entity, ordered by most recent first. Each snapshot represents a point-in-time verification result. Charges 5 credits per request. Supports pagination via limit and offset query parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

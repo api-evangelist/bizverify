@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BizVerify Auth API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "requestAccess",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/auth/request-access",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request API access — creates an account if needed and sends a verification code to the provided email. Use with POST /v1/auth/verify-access to complete the flow and receive an API key."
+        },
+        {
+          "info": {
+            "name": "verifyAccess",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/auth/verify-access",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify the email code from POST /v1/auth/request-access and receive a new API key. The email is marked as verified upon success."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

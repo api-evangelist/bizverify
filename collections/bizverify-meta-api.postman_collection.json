@@ -1,0 +1,209 @@
+{
+  "item": [
+    {
+      "id": "8842553f-ca79-44f0-ab35-ed3564dcf57b",
+      "name": "Meta",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "580abf17-859b-4429-b516-06b6dc7d15f9",
+          "name": "health Check",
+          "request": {
+            "name": "health Check",
+            "description": {
+              "content": "Health check endpoint. Returns 200 if the API, database, and Redis are all operational. Returns 503 if any component is degraded. No authentication required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e784195-a0ef-42be-a58c-c14b0f6857d2",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"healthy\",\n  \"checks\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"timestamp\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e16df9b0-8f71-4a70-b849-c0c58f22b6d1",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"healthy\",\n  \"checks\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"timestamp\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1b51d9b-dc18-4e61-968a-d1651c841fd0",
+          "name": "list Jurisdictions",
+          "request": {
+            "name": "list Jurisdictions",
+            "description": {
+              "content": "List all registered jurisdictions and their verification capabilities (quick, deep, search, entity lookup). No authentication required. For active jurisdictions only, use GET /v1/config.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "jurisdictions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a88ce72-cb5d-4b9d-98e0-75f8966312f1",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jurisdictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jurisdictions\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9c3a40de-d640-4fb2-bcbc-1fc5c38b7766",
+    "name": "BizVerify Meta API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.",
+      "type": "text/plain"
+    }
+  }
+}

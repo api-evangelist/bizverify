@@ -1,0 +1,370 @@
+openapi: 3.2.0
+info:
+  title: BizVerify Entities API
+  description: Business entity verification API. Verify company registrations, search business entities,
+    and check good standing across US states and international jurisdictions. Authenticate with an API
+    key via the X-API-Key header.
+  version: 1.0.0
+tags:
+- name: Entities
+paths:
+  /v1/entity/{entityId}:
+    get:
+      operationId: getEntity
+      tags:
+      - Entities
+      description: Get a cached entity by ID. Returns the most recent verification data for the entity.
+        Entity IDs are returned by POST /v1/verify and POST /v1/search. No credits charged.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: entityId
+        required: true
+        description: The entity ID returned from a verification or search
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The cached entity ID
+                  jurisdiction:
+                    type: string
+                    description: Jurisdiction code, e.g. "us-fl" or "gb"
+                  jurisdiction_id:
+                    description: The entity identifier within its jurisdiction
+                    type:
+                    - string
+                    - 'null'
+                  entity_name:
+                    type: string
+                    description: The registered business name
+                  entity_type:
+                    type: string
+                    enum:
+                    - llc
+                    - corporation
+                    - lp
+                    - llp
+                    - sole_proprietorship
+                    - nonprofit
+                    - general_partnership
+                    - other
+                    description: The entity type
+                  status:
+                    type: string
+                    enum:
+                    - active
+                    - inactive
+                    - dissolved
+                    - suspended
+                    - revoked
+                    - merged
+                    - withdrawn
+                    - unknown
+                    description: The registration status
+                  good_standing:
+                    description: Whether the entity is in good standing (null if not determinable)
+                    type:
+                    - boolean
+                    - 'null'
+                  formation_date:
+                    description: Formation/registration date, if available
+                    type:
+                    - string
+                    - 'null'
+                  registered_agent:
+                    description: The registered agent, if available
+                    type:
+                    - object
+                    - 'null'
+                    properties:
+                      name:
+                        type: string
+                      address:
+                        type:
+                        - object
+                        - 'null'
+                        properties:
+                          line1:
+                            type: string
+                          line2:
+                            type:
+                            - string
+                            - 'null'
+                          city:
+                            type: string
+                          state:
+                            type:
+                            - string
+                            - 'null'
+                          postal_code:
+                            type:
+                            - string
+                            - 'null'
+                          country:
+                            type: string
+                        required:
+                        - line1
+                        - line2
+                        - city
+                        - state
+                        - postal_code
+                        - country
+                        additionalProperties: false
+                    required:
+                    - name
+                    - address
+                    additionalProperties: false
+                  officers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        title:
+                          type: string
+                        address:
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            line1:
+                              type: string
+                            line2:
+                              type:
+                              - string
+                              - 'null'
+                            city:
+                              type: string
+                            state:
+                              type:
+                              - string
+                              - 'null'
+                            postal_code:
+                              type:
+                              - string
+                              - 'null'
+                            country:
+                              type: string
+                          required:
+                          - line1
+                          - line2
+                          - city
+                          - state
+                          - postal_code
+                          - country
+                          additionalProperties: false
+                      required:
+                      - name
+                      - title
+                      - address
+                      additionalProperties: false
+                    description: Known officers/directors
+                  principal_address:
+                    description: Principal office address, if available
+                    type:
+                    - object
+                    - 'null'
+                    properties:
+                      line1:
+                        type: string
+                      line2:
+                        type:
+                        - string
+                        - 'null'
+                      city:
+                        type: string
+                      state:
+                        type:
+                        - string
+                        - 'null'
+                      postal_code:
+                        type:
+                        - string
+                        - 'null'
+                      country:
+                        type: string
+                    required:
+                    - line1
+                    - line2
+                    - city
+                    - state
+                    - postal_code
+                    - country
+                    additionalProperties: false
+                  filing_history_summary:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                        type:
+                          type: string
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                      required:
+                      - date
+                      - type
+                      - description
+                      additionalProperties: false
+                    description: Recent filing history
+                  last_verified_at:
+                    description: ISO 8601 timestamp of the most recent verification, if any
+                    type:
+                    - string
+                    - 'null'
+                  snapshots:
+                    type: number
+                    description: Number of verification snapshots on record for this entity
+                  created_at:
+                    type: string
+                    description: ISO 8601 timestamp of when the entity was first cached
+                  updated_at:
+                    type: string
+                    description: ISO 8601 timestamp of the most recent update
+                required:
+                - id
+                - jurisdiction
+                - jurisdiction_id
+                - entity_name
+                - entity_type
+                - status
+                - good_standing
+                - formation_date
+                - registered_agent
+                - officers
+                - principal_address
+                - filing_history_summary
+                - last_verified_at
+                - snapshots
+                - created_at
+                - updated_at
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+  /v1/entity/{entityId}/history:
+    get:
+      operationId: getEntityHistory
+      tags:
+      - Entities
+      description: Get historical verification snapshots for an entity, ordered by most recent first.
+        Each snapshot represents a point-in-time verification result. Charges 5 credits per request. Supports
+        pagination via limit and offset query parameters.
+      parameters:
+      - schema:
+          default: 50
+          type: integer
+          minimum: 1
+          maximum: 200
+        in: query
+        name: limit
+        required: false
+      - schema:
+          default: 0
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        in: query
+        name: offset
+        required: false
+      - schema:
+          type: string
+        in: path
+        name: entityId
+        required: true
+        description: The entity ID returned from a verification or search
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  snapshots:
+                    type: array
+                    items: {}
+                  total:
+                    type: number
+                  limit:
+                    type: number
+                  offset:
+                    type: number
+                required:
+                - snapshots
+                - total
+                - limit
+                - offset
+                additionalProperties: false
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: X-API-Key
+      in: header
+      description: API key authentication. Obtain a key via POST /v1/auth/request-access and POST /v1/auth/verify-access.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth
+      description: OAuth 2.1 Bearer token. Obtain via the /oauth/authorize flow.

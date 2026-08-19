@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BizVerify Tools API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OpenAI function calling tool definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tools/openai.json"
+          },
+          "docs": "Returns BizVerify tool definitions in OpenAI function calling format. Use these to register BizVerify tools with any OpenAI-compatible model."
+        },
+        {
+          "info": {
+            "name": "Anthropic tool use definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tools/anthropic.json"
+          },
+          "docs": "Returns BizVerify tool definitions in Anthropic tool use format. Use these to register BizVerify tools with any Anthropic-compatible model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

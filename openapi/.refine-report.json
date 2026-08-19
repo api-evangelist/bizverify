@@ -1,0 +1,41 @@
+{
+  "provider": "bizverify",
+  "sources": [
+    "bizverify-account-api-openapi.yml",
+    "bizverify-auth-api-openapi.yml",
+    "bizverify-billing-api-openapi.yml",
+    "bizverify-entities-api-openapi.yml",
+    "bizverify-meta-api-openapi.yml",
+    "bizverify-public-api-openapi.yml",
+    "bizverify-search-api-openapi.yml",
+    "bizverify-tools-api-openapi.yml",
+    "bizverify-verification-api-openapi.yml"
+  ],
+  "outputs": [
+    "bizverify-account-api-openapi.yml",
+    "bizverify-auth-api-openapi.yml",
+    "bizverify-billing-api-openapi.yml",
+    "bizverify-entities-api-openapi.yml",
+    "bizverify-meta-api-openapi.yml",
+    "bizverify-public-api-openapi.yml",
+    "bizverify-search-api-openapi.yml",
+    "bizverify-tools-api-openapi.yml",
+    "bizverify-verification-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "bizverify-account-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bizverify-auth-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bizverify-billing-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bizverify-entities-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bizverify-meta-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bizverify-public-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bizverify-search-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bizverify-tools-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bizverify-verification-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

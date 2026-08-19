@@ -1,0 +1,164 @@
+{
+  "item": [
+    {
+      "id": "dfa10663-0c19-420c-bbb9-94ca25b6e2bd",
+      "name": "Public",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0509c0e7-5f22-4d1e-b0e6-d65a41bba8af",
+          "name": "get Config",
+          "request": {
+            "name": "get Config",
+            "description": {
+              "content": "Get public configuration including supported jurisdictions, credit pricing, available features, and API status. No authentication required. Use this to discover supported jurisdictions and understand credit costs before making API calls.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca652a1c-3538-4873-9560-3b7b25f58059",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jurisdictions\": {\n    \"stats\": {\n      \"totalJurisdictions\": 860.2614378972562,\n      \"usStates\": 6406.675808768559,\n      \"countries\": 4603.904991615416\n    },\n    \"supported\": {\n      \"us\": [\n        {\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"capabilities\": {\n            \"search\": false,\n            \"entityLookup\": true,\n            \"supportsQuick\": true,\n            \"supportsDeep\": false,\n            \"availableFields\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"capabilities\": {\n            \"search\": false,\n            \"entityLookup\": true,\n            \"supportsQuick\": true,\n            \"supportsDeep\": false,\n            \"availableFields\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        }\n      ],\n      \"international\": [\n        {\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"capabilities\": {\n            \"search\": true,\n            \"entityLookup\": false,\n            \"supportsQuick\": false,\n            \"supportsDeep\": true,\n            \"availableFields\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        },\n        {\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"capabilities\": {\n            \"search\": true,\n            \"entityLookup\": false,\n            \"supportsQuick\": true,\n            \"supportsDeep\": true,\n            \"availableFields\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        }\n      ],\n      \"comingSoon\": [\n        {\n          \"name\": \"string\",\n          \"code\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"code\": \"string\"\n        }\n      ]\n    }\n  },\n  \"checker\": {\n    \"jurisdictions\": [\n      {\n        \"label\": \"string\",\n        \"code\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"code\": \"string\"\n      }\n    ]\n  },\n  \"pricing\": {\n    \"creditCosts\": {\n      \"quick\": 6707.807985913618,\n      \"deep\": 457.1118516086747,\n      \"deepForceRefresh\": 4469.762430197825,\n      \"search\": 8979.346941716927,\n      \"entityHistory\": 3407.5937075783922,\n      \"entityLookup\": 2938.1528218413687\n    },\n    \"freeTier\": {\n      \"credits\": 4010.1630784877793,\n      \"replenish\": \"string\",\n      \"rateLimit\": \"string\"\n    },\n    \"packages\": [\n      {\n        \"name\": \"string\",\n        \"credits\": 6477.499377372606,\n        \"price\": \"string\",\n        \"pricePerCredit\": \"string\",\n        \"highlighted\": false,\n        \"badge\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"credits\": 3254.688522952498,\n        \"price\": \"string\",\n        \"pricePerCredit\": \"string\",\n        \"highlighted\": false,\n        \"badge\": \"string\"\n      }\n    ]\n  },\n  \"features\": {\n    \"webhooks\": false,\n    \"pagination\": false,\n    \"asyncJobs\": true\n  },\n  \"rateLimits\": {\n    \"default\": 760.3643257783089\n  },\n  \"status\": {\n    \"api\": \"string\",\n    \"lastUpdated\": \"string\"\n  },\n  \"legal\": {\n    \"terms_url\": \"string\",\n    \"privacy_url\": \"string\",\n    \"acceptable_use_url\": \"string\",\n    \"version\": \"string\"\n  },\n  \"docs\": {\n    \"openapi\": \"string\",\n    \"interactive\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7a2309a-172b-4c4a-9ecf-d2f1b169b329",
+          "name": "get Open Api Spec",
+          "request": {
+            "name": "get Open Api Spec",
+            "description": {
+              "content": "Download the OpenAPI 3.1 specification as JSON. Use this to generate client SDKs or explore the API schema programmatically.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "openapi.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a9300d2-74fb-4287-9fc7-0dae1e6bef3e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "openapi.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "26c96acf-6a2d-4952-8b85-ba63494280c8",
+    "name": "BizVerify Public API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.",
+      "type": "text/plain"
+    }
+  }
+}

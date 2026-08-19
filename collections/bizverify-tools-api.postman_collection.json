@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "d6547d85-4977-44fe-9ad5-623aae8ad7a6",
+      "name": "Tools",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3037aac1-4d06-4fb7-8a47-6111bd41506d",
+          "name": "OpenAI function calling tool definitions",
+          "request": {
+            "name": "OpenAI function calling tool definitions",
+            "description": {
+              "content": "Returns BizVerify tool definitions in OpenAI function calling format. Use these to register BizVerify tools with any OpenAI-compatible model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tools",
+                "openai.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ef5e731-bb88-48c8-9dc1-3cd0690b7b91",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tools",
+                    "openai.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e07eb71-e518-4a5b-b80b-261a02c04b5b",
+          "name": "Anthropic tool use definitions",
+          "request": {
+            "name": "Anthropic tool use definitions",
+            "description": {
+              "content": "Returns BizVerify tool definitions in Anthropic tool use format. Use these to register BizVerify tools with any Anthropic-compatible model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tools",
+                "anthropic.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77077d32-eb69-44ed-b58c-8c3ffdb78a07",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tools",
+                    "anthropic.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "70f6ec74-f4f8-430d-9432-e0cf40c62172",
+    "name": "BizVerify Tools API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.",
+      "type": "text/plain"
+    }
+  }
+}

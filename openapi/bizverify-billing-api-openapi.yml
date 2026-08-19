@@ -1,0 +1,189 @@
+openapi: 3.2.0
+info:
+  title: BizVerify Billing API
+  description: Business entity verification API. Verify company registrations, search business entities,
+    and check good standing across US states and international jurisdictions. Authenticate with an API
+    key via the X-API-Key header.
+  version: 1.0.0
+tags:
+- name: Billing
+paths:
+  /v1/billing/:
+    get:
+      operationId: getBilling
+      tags:
+      - Billing
+      description: Get your current credit balance, available credit packages for purchase, and recent
+        transaction history. Supports pagination for transaction history via limit and offset query parameters.
+      parameters:
+      - schema:
+          default: 50
+          type: integer
+          minimum: 1
+          maximum: 200
+        in: query
+        name: limit
+        required: false
+        description: Maximum number of transactions to return (default 50, max 200)
+      - schema:
+          default: 0
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        in: query
+        name: offset
+        required: false
+        description: Number of transactions to skip for pagination
+      security:
+      - apiKey: []
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: number
+                    description: Current credit balance
+                  packages:
+                    description: Available credit packages for purchase
+                  transactions:
+                    description: Recent credit transactions (purchases, deductions, refunds)
+                required:
+                - balance
+                - packages
+                - transactions
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+  /v1/billing/purchase:
+    post:
+      operationId: purchaseCredits
+      tags:
+      - Billing
+      description: Create a Stripe checkout session to purchase a credit package. Returns a Stripe URL
+        to redirect the user to for payment. Credits are added to your balance automatically after successful
+        payment via webhook.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                package_id:
+                  type: string
+                  enum:
+                  - credits_100
+                  - credits_500
+                  - credits_2000
+                  - credits_10000
+                  description: Credit package ID to purchase. See GET /v1/billing for available packages.
+              required:
+              - package_id
+      security:
+      - apiKey: []
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                    description: Stripe checkout session ID
+                  url:
+                    type: string
+                    description: Stripe checkout URL — redirect the user here to complete payment
+                required:
+                - session_id
+                - url
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: X-API-Key
+      in: header
+      description: API key authentication. Obtain a key via POST /v1/auth/request-access and POST /v1/auth/verify-access.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth
+      description: OAuth 2.1 Bearer token. Obtain via the /oauth/authorize flow.

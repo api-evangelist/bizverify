@@ -1,0 +1,378 @@
+openapi: 3.2.0
+info:
+  title: BizVerify Verification API
+  description: Business entity verification API. Verify company registrations, search business entities,
+    and check good standing across US states and international jurisdictions. Authenticate with an API
+    key via the X-API-Key header.
+  version: 1.0.0
+tags:
+- name: Verification
+paths:
+  /v1/verify:
+    post:
+      operationId: verifyBusiness
+      tags:
+      - Verification
+      description: 'Verify a business entity by name in a specific jurisdiction. Returns verification
+        results synchronously if available within timeout, or a job ID for async retrieval via GET /v1/verify/status/:jobId.
+        Charges credits based on tier: quick (1 credit), deep (15 credits), deep + force_refresh (25 credits).
+        The response includes `full_verification_available` indicating whether deep verification is supported
+        for the jurisdiction. When deep is not available, a `reason` object is returned. When webhook_url
+        is provided, the result is delivered as a POST request to that URL once the async job completes,
+        fails, or is refunded.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entity_name:
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                  description: The business name to verify, e.g. "Acme Corporation"
+                jurisdiction:
+                  type: string
+                  minLength: 2
+                  maxLength: 10
+                  description: Jurisdiction code, e.g. "us-fl" for Florida or "gb" for Great Britain
+                entity_type:
+                  description: Optional entity type filter to narrow results
+                  type: string
+                  enum:
+                  - llc
+                  - corporation
+                  - lp
+                  - llp
+                  - sole_proprietorship
+                  - nonprofit
+                  - general_partnership
+                  - other
+                verification_level:
+                  default: quick
+                  description: 'Verification tier: "quick" (1 credit) returns existence + status. "deep"
+                    (15 credits) returns full entity details including officers, registered agent, formation
+                    date, and filing history. Deep is only available in a subset of jurisdictions; requesting
+                    deep where unavailable returns a quick result with a reason.'
+                  type: string
+                  enum:
+                  - quick
+                  - deep
+                force_refresh:
+                  default: false
+                  description: 'If true, returns the most current result instead of a previously stored
+                    one. Applies to deep verification only (cost: 25 credits instead of 15); ignored on
+                    quick verifications.'
+                  type: boolean
+                webhook_url:
+                  description: Optional URL to receive webhook notifications when the async job completes,
+                    fails, or is refunded. Must be a publicly reachable http(s) URL.
+                  type: string
+                  format: uri
+              required:
+              - entity_name
+              - jurisdiction
+      parameters:
+      - schema:
+          type: string
+          maxLength: 128
+        in: header
+        name: idempotency-key
+        required: false
+        description: Optional key to make this request idempotent. Retries carrying the same key replay
+          the original response instead of charging again; a concurrent retry while the first is still
+          processing returns 409 IDEMPOTENCY_CONFLICT. Max 128 characters.
+      security:
+      - apiKey: []
+      callbacks:
+        verificationResult:
+          '{$request.body#/webhook_url}':
+            post:
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      required:
+                      - event
+                      - job_id
+                      - jurisdiction
+                      - entity_name
+                      - status
+                      - credits_charged
+                      - credits_refunded
+                      - completed_at
+                      properties:
+                        event:
+                          type: string
+                          enum:
+                          - verification.completed
+                          - verification.failed
+                          - verification.refunded
+                          description: The webhook event type
+                        job_id:
+                          type: string
+                          description: The verification job ID
+                        jurisdiction:
+                          type: string
+                          description: Jurisdiction code (e.g. us-fl, gb)
+                        entity_name:
+                          type: string
+                          description: The entity name that was verified
+                        status:
+                          type: string
+                          enum:
+                          - completed
+                          - failed
+                          - refunded
+                          description: The job outcome status
+                        data:
+                          type:
+                          - object
+                          - 'null'
+                          description: Verification result data (present on completed)
+                        error:
+                          type:
+                          - string
+                          - 'null'
+                          description: Error message (present on failed)
+                        credits_charged:
+                          type: integer
+                          description: Number of credits charged for this job
+                        credits_refunded:
+                          type: boolean
+                          description: Whether credits were refunded
+                        completed_at:
+                          type: string
+                          format: date-time
+                          description: ISO 8601 timestamp of completion
+              responses:
+                2XX:
+                  description: Webhook accepted
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: 'Job status: "completed" (sync result) or "pending" (async — poll via
+                      GET /v1/verify/status/:jobId)'
+                  verification_level:
+                    type: string
+                    enum:
+                    - quick
+                    - deep
+                    description: The tier at which verification was performed. May differ from the requested
+                      level if deep was requested but not available for this jurisdiction.
+                  full_verification_available:
+                    type: boolean
+                    description: Whether deep verification is available for this jurisdiction
+                  reason:
+                    description: Present when full_verification_available is false, explaining the tier
+                      result
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        enum:
+                        - jurisdiction_quick_only
+                        description: Reason code for tier availability
+                      message:
+                        type: string
+                        description: Human-readable explanation
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                  data:
+                    description: Verification result data, present when status is "completed"
+                  job_id:
+                    description: Job ID for async polling, present when status is "pending"
+                    type: string
+                  entity_id:
+                    description: Cached entity ID, present when a match was found
+                    type: string
+                  cached:
+                    type: boolean
+                    description: Whether the result was served from cache
+                  credits_charged:
+                    type: number
+                    description: Number of credits deducted for this request
+                required:
+                - status
+                - verification_level
+                - full_verification_available
+                - cached
+                - credits_charged
+                additionalProperties: false
+        '202':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: 'Job status: "completed" (sync result) or "pending" (async — poll via
+                      GET /v1/verify/status/:jobId)'
+                  verification_level:
+                    type: string
+                    enum:
+                    - quick
+                    - deep
+                    description: The tier at which verification was performed. May differ from the requested
+                      level if deep was requested but not available for this jurisdiction.
+                  full_verification_available:
+                    type: boolean
+                    description: Whether deep verification is available for this jurisdiction
+                  reason:
+                    description: Present when full_verification_available is false, explaining the tier
+                      result
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        enum:
+                        - jurisdiction_quick_only
+                        description: Reason code for tier availability
+                      message:
+                        type: string
+                        description: Human-readable explanation
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                  data:
+                    description: Verification result data, present when status is "completed"
+                  job_id:
+                    description: Job ID for async polling, present when status is "pending"
+                    type: string
+                  entity_id:
+                    description: Cached entity ID, present when a match was found
+                    type: string
+                  cached:
+                    type: boolean
+                    description: Whether the result was served from cache
+                  credits_charged:
+                    type: number
+                    description: Number of credits deducted for this request
+                required:
+                - status
+                - verification_level
+                - full_verification_available
+                - cached
+                - credits_charged
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+        '409':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+  /v1/verify/status/{jobId}:
+    get:
+      operationId: getVerificationStatus
+      tags:
+      - Verification
+      description: Check the status of an async verification job. Poll this endpoint after POST /v1/verify
+        returns status "pending" with a job_id. Returns the full verification result once the job completes.
+      parameters:
+      - schema:
+          type: string
+        in: path
+        name: jobId
+        required: true
+        description: The job ID returned from POST /v1/verify
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: X-API-Key
+      in: header
+      description: API key authentication. Obtain a key via POST /v1/auth/request-access and POST /v1/auth/verify-access.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth
+      description: OAuth 2.1 Bearer token. Obtain via the /oauth/authorize flow.

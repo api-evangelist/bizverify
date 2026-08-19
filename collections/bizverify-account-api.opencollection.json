@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BizVerify Account API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getAccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/account/",
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get your account details including email, plan, credit balance, and all API keys. Use this to check your current credit balance before making API calls."
+        },
+        {
+          "info": {
+            "name": "updateEmail",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/account/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update your account email address. Sets email_verified to false and sends a verification email to the new address. You must re-verify before using credit-consuming endpoints."
+        },
+        {
+          "info": {
+            "name": "getUsageStats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/account/usage",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days to look back (default 30, max 90)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get API usage statistics for your account, broken down by day, endpoint, and jurisdiction. Useful for monitoring consumption and identifying usage patterns."
+        },
+        {
+          "info": {
+            "name": "getDataExport",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/account/data-export",
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Export all your account data including profile, API keys, credit transactions, verification jobs, and usage statistics (GDPR right to data portability)."
+        },
+        {
+          "info": {
+            "name": "createApiKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/account/keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new API key with a descriptive label. The full key is returned only once — store it securely. You can create multiple keys for different environments or integrations."
+        },
+        {
+          "info": {
+            "name": "revokeApiKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/account/keys/:keyId",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The API key ID to revoke"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Revoke an API key immediately. The key will no longer authenticate requests. This action is irreversible."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

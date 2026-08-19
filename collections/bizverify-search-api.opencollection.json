@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BizVerify Search API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "searchEntities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for business entities across one or multiple jurisdictions. Returns matching entities with confidence scores. Charges 2 credits per jurisdiction searched. Use the jurisdiction parameter to search a specific jurisdiction, or omit it to search all active jurisdictions. Supports pagination via limit and offset. Search is available in every active jurisdiction regardless of verification tier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

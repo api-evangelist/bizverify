@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BizVerify Verification API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "verifyBusiness",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/verify",
+            "headers": [
+              {
+                "name": "idempotency-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Verify a business entity by name in a specific jurisdiction. Returns verification results synchronously if available within timeout, or a job ID for async retrieval via GET /v1/verify/status/:jobId. Charges credits based on tier: quick (1 credit), deep (15 credits), deep + force_refresh (25 credits). The response includes `full_verification_available` indicating whether deep verification is supported for the jurisdiction. When deep is not available, a `reason` object is returned. When webhook_ur"
+        },
+        {
+          "info": {
+            "name": "getVerificationStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/verify/status/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The job ID returned from POST /v1/verify"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Check the status of an async verification job. Poll this endpoint after POST /v1/verify returns status \"pending\" with a job_id. Returns the full verification result once the job completes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

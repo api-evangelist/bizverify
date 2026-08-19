@@ -1,0 +1,505 @@
+{
+  "item": [
+    {
+      "id": "0b9c4912-eb38-4620-ae12-df48676b0bbf",
+      "name": "Verification",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aa3941b5-e7b6-458d-821e-959f9027a2a3",
+          "name": "verify Business",
+          "request": {
+            "name": "verify Business",
+            "description": {
+              "content": "Verify a business entity by name in a specific jurisdiction. Returns verification results synchronously if available within timeout, or a job ID for async retrieval via GET /v1/verify/status/:jobId. Charges credits based on tier: quick (1 credit), deep (15 credits), deep + force_refresh (25 credits). The response includes `full_verification_available` indicating whether deep verification is supported for the jurisdiction. When deep is not available, a `reason` object is returned. When webhook_url is provided, the result is delivered as a POST request to that URL once the async job completes, fails, or is refunded.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optional key to make this request idempotent. Retries carrying the same key replay the original response instead of charging again; a concurrent retry while the first is still processing returns 409 IDEMPOTENCY_CONFLICT. Max 128 characters.",
+                "key": "idempotency-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity_name\": \"<string>\",\n  \"jurisdiction\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"verification_level\": \"quick\",\n  \"force_refresh\": false,\n  \"webhook_url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f8c4f5d-2f6d-4fa2-81c0-a5d9c0c97219",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional key to make this request idempotent. Retries carrying the same key replay the original response instead of charging again; a concurrent retry while the first is still processing returns 409 IDEMPOTENCY_CONFLICT. Max 128 characters.",
+                    "key": "idempotency-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_name\": \"<string>\",\n  \"jurisdiction\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"verification_level\": \"quick\",\n  \"force_refresh\": false,\n  \"webhook_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"verification_level\": \"deep\",\n  \"full_verification_available\": false,\n  \"cached\": true,\n  \"credits_charged\": 7379.316998141766,\n  \"reason\": {\n    \"code\": \"jurisdiction_quick_only\",\n    \"message\": \"string\"\n  },\n  \"data\": {},\n  \"job_id\": \"string\",\n  \"entity_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d71c16cb-6ac6-4df5-89cd-7ed78e5c51cf",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional key to make this request idempotent. Retries carrying the same key replay the original response instead of charging again; a concurrent retry while the first is still processing returns 409 IDEMPOTENCY_CONFLICT. Max 128 characters.",
+                    "key": "idempotency-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_name\": \"<string>\",\n  \"jurisdiction\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"verification_level\": \"quick\",\n  \"force_refresh\": false,\n  \"webhook_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"verification_level\": \"deep\",\n  \"full_verification_available\": false,\n  \"cached\": true,\n  \"credits_charged\": 7379.316998141766,\n  \"reason\": {\n    \"code\": \"jurisdiction_quick_only\",\n    \"message\": \"string\"\n  },\n  \"data\": {},\n  \"job_id\": \"string\",\n  \"entity_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e98e780-568c-417b-8d56-ae78ceb68a17",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional key to make this request idempotent. Retries carrying the same key replay the original response instead of charging again; a concurrent retry while the first is still processing returns 409 IDEMPOTENCY_CONFLICT. Max 128 characters.",
+                    "key": "idempotency-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_name\": \"<string>\",\n  \"jurisdiction\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"verification_level\": \"quick\",\n  \"force_refresh\": false,\n  \"webhook_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df890953-6ccc-4260-b1f3-df73979d1383",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional key to make this request idempotent. Retries carrying the same key replay the original response instead of charging again; a concurrent retry while the first is still processing returns 409 IDEMPOTENCY_CONFLICT. Max 128 characters.",
+                    "key": "idempotency-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_name\": \"<string>\",\n  \"jurisdiction\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"verification_level\": \"quick\",\n  \"force_refresh\": false,\n  \"webhook_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01af7653-bf7e-4f98-9a45-26482e923d1d",
+          "name": "get Verification Status",
+          "request": {
+            "name": "get Verification Status",
+            "description": {
+              "content": "Check the status of an async verification job. Poll this endpoint after POST /v1/verify returns status \"pending\" with a job_id. Returns the full verification result once the job completes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "verify",
+                "status",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) The job ID returned from POST /v1/verify"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "27441bab-d402-402c-8c72-d43d35809245",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "verify",
+                    "status",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The job ID returned from POST /v1/verify"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c29c0bb9-f3c0-4b80-a612-2baac85d071b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "verify",
+                    "status",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The job ID returned from POST /v1/verify"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": \"\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4472329e-1eb0-4db1-8eb8-61a70084443f",
+    "name": "BizVerify Verification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,321 @@
+openapi: 3.2.0
+info:
+  title: BizVerify Public API
+  description: Business entity verification API. Verify company registrations, search business entities,
+    and check good standing across US states and international jurisdictions. Authenticate with an API
+    key via the X-API-Key header.
+  version: 1.0.0
+tags:
+- name: Public
+paths:
+  /v1/config:
+    get:
+      operationId: getConfig
+      tags:
+      - Public
+      description: Get public configuration including supported jurisdictions, credit pricing, available
+        features, and API status. No authentication required. Use this to discover supported jurisdictions
+        and understand credit costs before making API calls.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jurisdictions:
+                    type: object
+                    properties:
+                      stats:
+                        type: object
+                        properties:
+                          totalJurisdictions:
+                            type: number
+                          usStates:
+                            type: number
+                          countries:
+                            type: number
+                        required:
+                        - totalJurisdictions
+                        - usStates
+                        - countries
+                        additionalProperties: false
+                      supported:
+                        type: object
+                        properties:
+                          us:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                code:
+                                  type: string
+                                capabilities:
+                                  type: object
+                                  properties:
+                                    search:
+                                      type: boolean
+                                    entityLookup:
+                                      type: boolean
+                                    supportsQuick:
+                                      type: boolean
+                                    supportsDeep:
+                                      type: boolean
+                                    availableFields:
+                                      type: array
+                                      items:
+                                        type: string
+                                  required:
+                                  - search
+                                  - entityLookup
+                                  - supportsQuick
+                                  - supportsDeep
+                                  - availableFields
+                                  additionalProperties: false
+                              required:
+                              - name
+                              - code
+                              - capabilities
+                              additionalProperties: false
+                          international:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                code:
+                                  type: string
+                                capabilities:
+                                  type: object
+                                  properties:
+                                    search:
+                                      type: boolean
+                                    entityLookup:
+                                      type: boolean
+                                    supportsQuick:
+                                      type: boolean
+                                    supportsDeep:
+                                      type: boolean
+                                    availableFields:
+                                      type: array
+                                      items:
+                                        type: string
+                                  required:
+                                  - search
+                                  - entityLookup
+                                  - supportsQuick
+                                  - supportsDeep
+                                  - availableFields
+                                  additionalProperties: false
+                              required:
+                              - name
+                              - code
+                              - capabilities
+                              additionalProperties: false
+                          comingSoon:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                code:
+                                  type: string
+                              required:
+                              - name
+                              - code
+                              additionalProperties: false
+                        required:
+                        - us
+                        - international
+                        - comingSoon
+                        additionalProperties: false
+                    required:
+                    - stats
+                    - supported
+                    additionalProperties: false
+                  checker:
+                    type: object
+                    properties:
+                      jurisdictions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            code:
+                              type: string
+                          required:
+                          - label
+                          - code
+                          additionalProperties: false
+                    required:
+                    - jurisdictions
+                    additionalProperties: false
+                  pricing:
+                    type: object
+                    properties:
+                      creditCosts:
+                        type: object
+                        properties:
+                          quick:
+                            type: number
+                          deep:
+                            type: number
+                          deepForceRefresh:
+                            type: number
+                          search:
+                            type: number
+                          entityHistory:
+                            type: number
+                          entityLookup:
+                            type: number
+                        required:
+                        - quick
+                        - deep
+                        - deepForceRefresh
+                        - search
+                        - entityHistory
+                        - entityLookup
+                        additionalProperties: false
+                      freeTier:
+                        type: object
+                        properties:
+                          credits:
+                            type: number
+                          replenish:
+                            type: string
+                          rateLimit:
+                            type: string
+                        required:
+                        - credits
+                        - replenish
+                        - rateLimit
+                        additionalProperties: false
+                      packages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            credits:
+                              type: number
+                            price:
+                              type: string
+                            pricePerCredit:
+                              type: string
+                            highlighted:
+                              type: boolean
+                            badge:
+                              type: string
+                          required:
+                          - name
+                          - credits
+                          - price
+                          - pricePerCredit
+                          - highlighted
+                          additionalProperties: false
+                    required:
+                    - creditCosts
+                    - freeTier
+                    - packages
+                    additionalProperties: false
+                  features:
+                    type: object
+                    properties:
+                      webhooks:
+                        type: boolean
+                      pagination:
+                        type: boolean
+                      asyncJobs:
+                        type: boolean
+                    required:
+                    - webhooks
+                    - pagination
+                    - asyncJobs
+                    additionalProperties: false
+                  rateLimits:
+                    type: object
+                    properties:
+                      default:
+                        type: number
+                    required:
+                    - default
+                    additionalProperties: false
+                  status:
+                    type: object
+                    properties:
+                      api:
+                        type: string
+                      lastUpdated:
+                        type: string
+                    required:
+                    - api
+                    - lastUpdated
+                    additionalProperties: false
+                  legal:
+                    type: object
+                    properties:
+                      terms_url:
+                        type: string
+                      privacy_url:
+                        type: string
+                      acceptable_use_url:
+                        type: string
+                      version:
+                        type: string
+                    required:
+                    - terms_url
+                    - privacy_url
+                    - acceptable_use_url
+                    - version
+                    additionalProperties: false
+                  docs:
+                    type: object
+                    properties:
+                      openapi:
+                        type: string
+                      interactive:
+                        type: string
+                    required:
+                    - openapi
+                    - interactive
+                    additionalProperties: false
+                required:
+                - jurisdictions
+                - checker
+                - pricing
+                - features
+                - rateLimits
+                - status
+                - legal
+                - docs
+                additionalProperties: false
+  /v1/openapi.json:
+    get:
+      operationId: getOpenApiSpec
+      tags:
+      - Public
+      description: Download the OpenAPI 3.1 specification as JSON. Use this to generate client SDKs or
+        explore the API schema programmatically.
+      responses:
+        '200':
+          description: Default Response
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: X-API-Key
+      in: header
+      description: API key authentication. Obtain a key via POST /v1/auth/request-access and POST /v1/auth/verify-access.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth
+      description: OAuth 2.1 Bearer token. Obtain via the /oauth/authorize flow.

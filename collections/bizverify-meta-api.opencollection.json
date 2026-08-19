@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BizVerify Meta API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Meta",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "healthCheck",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          },
+          "docs": "Health check endpoint. Returns 200 if the API, database, and Redis are all operational. Returns 503 if any component is degraded. No authentication required."
+        },
+        {
+          "info": {
+            "name": "listJurisdictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/jurisdictions"
+          },
+          "docs": "List all registered jurisdictions and their verification capabilities (quick, deep, search, entity lookup). No authentication required. For active jurisdictions only, use GET /v1/config."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,165 @@
+openapi: 3.2.0
+info:
+  title: BizVerify Auth API
+  description: Business entity verification API. Verify company registrations, search business entities,
+    and check good standing across US states and international jurisdictions. Authenticate with an API
+    key via the X-API-Key header.
+  version: 1.0.0
+tags:
+- name: Auth
+paths:
+  /v1/auth/request-access:
+    post:
+      operationId: requestAccess
+      tags:
+      - Auth
+      description: Request API access — creates an account if needed and sends a verification code to
+        the provided email. Use with POST /v1/auth/verify-access to complete the flow and receive an API
+        key.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                  description: Email address to register or re-authenticate
+                accept_terms:
+                  type: boolean
+                  description: Must be true to accept terms of service
+              required:
+              - email
+              - accept_terms
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Human-readable status message
+                required:
+                - message
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+  /v1/auth/verify-access:
+    post:
+      operationId: verifyAccess
+      tags:
+      - Auth
+      description: Verify the email code from POST /v1/auth/request-access and receive a new API key.
+        The email is marked as verified upon success.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                  description: Email address used in request-access
+                code:
+                  type: string
+                  minLength: 6
+                  maxLength: 6
+                  description: 6-digit verification code sent to the email
+                label:
+                  description: Optional label for the new API key
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+              required:
+              - email
+              - code
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_key:
+                    type: string
+                    description: API key for authenticating requests. Store securely — it will not be
+                      shown again.
+                  key_id:
+                    type: string
+                    description: Unique identifier for the API key
+                  label:
+                    type: string
+                    description: Label assigned to the API key
+                required:
+                - api_key
+                - key_id
+                - label
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                      details: {}
+                      suggestion:
+                        type: string
+                    required:
+                    - code
+                    - message
+                    additionalProperties: false
+                required:
+                - error
+                additionalProperties: false
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: X-API-Key
+      in: header
+      description: API key authentication. Obtain a key via POST /v1/auth/request-access and POST /v1/auth/verify-access.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth
+      description: OAuth 2.1 Bearer token. Obtain via the /oauth/authorize flow.

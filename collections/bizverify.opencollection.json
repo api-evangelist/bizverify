@@ -1,0 +1,489 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BizVerify API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Meta",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "healthCheck",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          },
+          "docs": "Health check endpoint. Returns 200 if the API, database, and Redis are all operational. Returns 503 if any component is degraded. No authentication required."
+        },
+        {
+          "info": {
+            "name": "listJurisdictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/jurisdictions"
+          },
+          "docs": "List all registered jurisdictions and their verification capabilities (quick, deep, search, entity lookup). No authentication required. For active jurisdictions only, use GET /v1/config."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OpenAI function calling tool definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tools/openai.json"
+          },
+          "docs": "Returns BizVerify tool definitions in OpenAI function calling format. Use these to register BizVerify tools with any OpenAI-compatible model."
+        },
+        {
+          "info": {
+            "name": "Anthropic tool use definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tools/anthropic.json"
+          },
+          "docs": "Returns BizVerify tool definitions in Anthropic tool use format. Use these to register BizVerify tools with any Anthropic-compatible model."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Public",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/config"
+          },
+          "docs": "Get public configuration including supported jurisdictions, credit pricing, available features, and API status. No authentication required. Use this to discover supported jurisdictions and understand credit costs before making API calls."
+        },
+        {
+          "info": {
+            "name": "getOpenApiSpec",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/openapi.json"
+          },
+          "docs": "Download the OpenAPI 3.1 specification as JSON. Use this to generate client SDKs or explore the API schema programmatically."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "requestAccess",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/auth/request-access",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request API access — creates an account if needed and sends a verification code to the provided email. Use with POST /v1/auth/verify-access to complete the flow and receive an API key."
+        },
+        {
+          "info": {
+            "name": "verifyAccess",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/auth/verify-access",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify the email code from POST /v1/auth/request-access and receive a new API key. The email is marked as verified upon success."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "verifyBusiness",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/verify",
+            "headers": [
+              {
+                "name": "idempotency-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Verify a business entity by name in a specific jurisdiction. Returns verification results synchronously if available within timeout, or a job ID for async retrieval via GET /v1/verify/status/:jobId. Charges credits based on tier: quick (1 credit), deep (15 credits), deep + force_refresh (25 credits). The response includes `full_verification_available` indicating whether deep verification is supported for the jurisdiction. When deep is not available, a `reason` object is returned. When webhook_ur"
+        },
+        {
+          "info": {
+            "name": "getVerificationStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/verify/status/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The job ID returned from POST /v1/verify"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Check the status of an async verification job. Poll this endpoint after POST /v1/verify returns status \"pending\" with a job_id. Returns the full verification result once the job completes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getEntity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/entity/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The entity ID returned from a verification or search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a cached entity by ID. Returns the most recent verification data for the entity. Entity IDs are returned by POST /v1/verify and POST /v1/search. No credits charged."
+        },
+        {
+          "info": {
+            "name": "getEntityHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/entity/:entityId/history",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "The entity ID returned from a verification or search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get historical verification snapshots for an entity, ordered by most recent first. Each snapshot represents a point-in-time verification result. Charges 5 credits per request. Supports pagination via limit and offset query parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "searchEntities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for business entities across one or multiple jurisdictions. Returns matching entities with confidence scores. Charges 2 credits per jurisdiction searched. Use the jurisdiction parameter to search a specific jurisdiction, or omit it to search all active jurisdictions. Supports pagination via limit and offset. Search is available in every active jurisdiction regardless of verification tier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getAccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/account/",
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get your account details including email, plan, credit balance, and all API keys. Use this to check your current credit balance before making API calls."
+        },
+        {
+          "info": {
+            "name": "updateEmail",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/account/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update your account email address. Sets email_verified to false and sends a verification email to the new address. You must re-verify before using credit-consuming endpoints."
+        },
+        {
+          "info": {
+            "name": "getUsageStats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/account/usage",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days to look back (default 30, max 90)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get API usage statistics for your account, broken down by day, endpoint, and jurisdiction. Useful for monitoring consumption and identifying usage patterns."
+        },
+        {
+          "info": {
+            "name": "getDataExport",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/account/data-export",
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Export all your account data including profile, API keys, credit transactions, verification jobs, and usage statistics (GDPR right to data portability)."
+        },
+        {
+          "info": {
+            "name": "createApiKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/account/keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new API key with a descriptive label. The full key is returned only once — store it securely. You can create multiple keys for different environments or integrations."
+        },
+        {
+          "info": {
+            "name": "revokeApiKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/account/keys/:keyId",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The API key ID to revoke"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Revoke an API key immediately. The key will no longer authenticate requests. This action is irreversible."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Billing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getBilling",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/billing/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of transactions to return (default 50, max 200)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of transactions to skip for pagination"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get your current credit balance, available credit packages for purchase, and recent transaction history. Supports pagination for transaction history via limit and offset query parameters."
+        },
+        {
+          "info": {
+            "name": "purchaseCredits",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/billing/purchase",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a Stripe checkout session to purchase a credit package. Returns a Stripe URL to redirect the user to for payment. Credits are added to your balance automatically after successful payment via webhook."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
