@@ -20,6 +20,15 @@ tags:
   - Entity Verification
   - Compliance
   - MCP
+  - agent-native
+  - Developer Tools
+tags_raw:
+  - Business Verification
+  - KYB
+  - Know Your Business
+  - Entity Verification
+  - Compliance
+  - MCP
   - Agent-native
   - Developer Tools
 apis:
@@ -32,6 +41,11 @@ apis:
   humanURL: https://github.com/BizVerify/bizverify-mcp
   baseURL: https://api.bizverify.co/mcp
   tags:
+  - MCP
+  - agent-native
+  - Business Verification
+  - KYB
+  tags_raw:
   - MCP
   - Agent-native
   - Business Verification
@@ -63,6 +77,8 @@ apis:
   humanURL: https://docs.bizverify.co
   baseURL: https://api.bizverify.co
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
