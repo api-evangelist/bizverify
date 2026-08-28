@@ -10,6 +10,20 @@ description: >-
   credit-based with a free-tier allowance, and the MCP server answers tools/list without
   credentials.
 url: https://raw.githubusercontent.com/api-evangelist/bizverify/refs/heads/main/apis.yml
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 created: '2026-08-02'
 modified: '2026-08-02'
 specificationVersion: '0.23'
