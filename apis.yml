@@ -34,7 +34,7 @@ tags:
   - Entity Verification
   - Compliance
   - MCP
-  - agent-native
+  - Agent-native
   - Developer Tools
 tags_raw:
   - Business Verification
@@ -56,7 +56,7 @@ apis:
   baseURL: https://api.bizverify.co/mcp
   tags:
   - MCP
-  - agent-native
+  - Agent-native
   - Business Verification
   - KYB
   tags_raw:
