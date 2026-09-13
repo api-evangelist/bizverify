@@ -13,8 +13,25 @@ deployment:
   probe: live
   checked: '2026-09-11'
   source: ptr_only reconciliation 2026-09-11 (apis.yml pointed here, no manifest existed)
-tools_note: No tool list captured. This manifest records a PROBED, reachable endpoint only; anonymous
-  tools/list was auth-gated or the server requires an initialize handshake this reachability probe does
-  not perform. Run signals/audit_mcp_authorship.py --probe to enumerate tools and settle platform-vs-provider
-  authorship. Do NOT derive a tool list from the OpenAPI and store it here -- that is a candidate manifest,
-  and it belongs under an X-MCPServerCandidate pointer.
+tools_count: 9
+tools:
+- name: get_config
+  description: ''
+- name: list_jurisdictions
+  description: ''
+- name: verify_business
+  description: ''
+- name: search_entities
+  description: ''
+- name: check_job_status
+  description: ''
+- name: get_entity
+  description: ''
+- name: get_entity_history
+  description: ''
+- name: get_account
+  description: ''
+- name: purchase_credits
+  description: ''
+tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
+authorship: provider
