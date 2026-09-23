@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: BizVerify Search API
-  description: Business entity verification API. Verify company registrations, search business entities,
-    and check good standing across US states and international jurisdictions. Authenticate with an API
-    key via the X-API-Key header.
+  description: Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.
   version: 1.0.0
 tags:
 - name: Search
@@ -13,11 +11,7 @@ paths:
       operationId: searchEntities
       tags:
       - Search
-      description: Search for business entities across one or multiple jurisdictions. Returns matching
-        entities with confidence scores. Charges 2 credits per jurisdiction searched. Use the jurisdiction
-        parameter to search a specific jurisdiction, or omit it to search all active jurisdictions. Supports
-        pagination via limit and offset. Search is available in every active jurisdiction regardless of
-        verification tier.
+      description: Search for business entities across one or multiple jurisdictions. Returns matching entities with confidence scores. Charges 2 credits per jurisdiction searched. Use the jurisdiction parameter to search a specific jurisdiction, or omit it to search all active jurisdictions. Supports pagination via limit and offset. Search is available in every active jurisdiction regardless of verification tier.
       requestBody:
         required: true
         content:
@@ -93,8 +87,7 @@ paths:
                     type: array
                     items:
                       type: string
-                    description: Subset of jurisdictions_searched that could not be completed (credits
-                      refunded for these)
+                    description: Subset of jurisdictions_searched that could not be completed (credits refunded for these)
                   credits_charged:
                     type: number
                     description: Net credits deducted after partial refunds for failed jurisdictions
@@ -131,6 +124,8 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Search entities
+      x-summary-source: derived
 components:
   securitySchemes:
     apiKey:

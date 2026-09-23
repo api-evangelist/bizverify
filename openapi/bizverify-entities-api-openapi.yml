@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: BizVerify Entities API
-  description: Business entity verification API. Verify company registrations, search business entities,
-    and check good standing across US states and international jurisdictions. Authenticate with an API
-    key via the X-API-Key header.
+  description: Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.
   version: 1.0.0
 tags:
 - name: Entities
@@ -13,8 +11,7 @@ paths:
       operationId: getEntity
       tags:
       - Entities
-      description: Get a cached entity by ID. Returns the most recent verification data for the entity.
-        Entity IDs are returned by POST /v1/verify and POST /v1/search. No credits charged.
+      description: Get a cached entity by ID. Returns the most recent verification data for the entity. Entity IDs are returned by POST /v1/verify and POST /v1/search. No credits charged.
       parameters:
       - schema:
           type: string
@@ -276,14 +273,14 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Get entity
+      x-summary-source: derived
   /v1/entity/{entityId}/history:
     get:
       operationId: getEntityHistory
       tags:
       - Entities
-      description: Get historical verification snapshots for an entity, ordered by most recent first.
-        Each snapshot represents a point-in-time verification result. Charges 5 credits per request. Supports
-        pagination via limit and offset query parameters.
+      description: Get historical verification snapshots for an entity, ordered by most recent first. Each snapshot represents a point-in-time verification result. Charges 5 credits per request. Supports pagination via limit and offset query parameters.
       parameters:
       - schema:
           default: 50
@@ -356,6 +353,8 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Get entity history
+      x-summary-source: derived
 components:
   securitySchemes:
     apiKey:

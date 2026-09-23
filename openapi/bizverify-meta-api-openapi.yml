@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: BizVerify Meta API
-  description: Business entity verification API. Verify company registrations, search business entities,
-    and check good standing across US states and international jurisdictions. Authenticate with an API
-    key via the X-API-Key header.
+  description: Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.
   version: 1.0.0
 tags:
 - name: Meta
@@ -13,8 +11,7 @@ paths:
       operationId: healthCheck
       tags:
       - Meta
-      description: Health check endpoint. Returns 200 if the API, database, and Redis are all operational.
-        Returns 503 if any component is degraded. No authentication required.
+      description: Health check endpoint. Returns 200 if the API, database, and Redis are all operational. Returns 503 if any component is degraded. No authentication required.
       responses:
         '200':
           description: Default Response
@@ -68,13 +65,14 @@ paths:
                 - checks
                 - timestamp
                 additionalProperties: false
+      summary: Health check
+      x-summary-source: derived
   /v1/jurisdictions:
     get:
       operationId: listJurisdictions
       tags:
       - Meta
-      description: List all registered jurisdictions and their verification capabilities (quick, deep,
-        search, entity lookup). No authentication required. For active jurisdictions only, use GET /v1/config.
+      description: List all registered jurisdictions and their verification capabilities (quick, deep, search, entity lookup). No authentication required. For active jurisdictions only, use GET /v1/config.
       responses:
         '200':
           description: Default Response
@@ -89,6 +87,8 @@ paths:
                 required:
                 - jurisdictions
                 additionalProperties: false
+      summary: List jurisdictions
+      x-summary-source: derived
 components:
   securitySchemes:
     apiKey:

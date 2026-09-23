@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: BizVerify Auth API
-  description: Business entity verification API. Verify company registrations, search business entities,
-    and check good standing across US states and international jurisdictions. Authenticate with an API
-    key via the X-API-Key header.
+  description: Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.
   version: 1.0.0
 tags:
 - name: Auth
@@ -13,9 +11,7 @@ paths:
       operationId: requestAccess
       tags:
       - Auth
-      description: Request API access — creates an account if needed and sends a verification code to
-        the provided email. Use with POST /v1/auth/verify-access to complete the flow and receive an API
-        key.
+      description: Request API access — creates an account if needed and sends a verification code to the provided email. Use with POST /v1/auth/verify-access to complete the flow and receive an API key.
       requestBody:
         required: true
         content:
@@ -72,13 +68,14 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Request access
+      x-summary-source: derived
   /v1/auth/verify-access:
     post:
       operationId: verifyAccess
       tags:
       - Auth
-      description: Verify the email code from POST /v1/auth/request-access and receive a new API key.
-        The email is marked as verified upon success.
+      description: Verify the email code from POST /v1/auth/request-access and receive a new API key. The email is marked as verified upon success.
       requestBody:
         required: true
         content:
@@ -114,8 +111,7 @@ paths:
                 properties:
                   api_key:
                     type: string
-                    description: API key for authenticating requests. Store securely — it will not be
-                      shown again.
+                    description: API key for authenticating requests. Store securely — it will not be shown again.
                   key_id:
                     type: string
                     description: Unique identifier for the API key
@@ -151,6 +147,8 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Verify access
+      x-summary-source: derived
 components:
   securitySchemes:
     apiKey:

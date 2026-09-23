@@ -1,15 +1,7 @@
 {
   "provider": "bizverify",
   "sources": [
-    "bizverify-account-api-openapi.yml",
-    "bizverify-auth-api-openapi.yml",
-    "bizverify-billing-api-openapi.yml",
-    "bizverify-entities-api-openapi.yml",
-    "bizverify-meta-api-openapi.yml",
-    "bizverify-public-api-openapi.yml",
-    "bizverify-search-api-openapi.yml",
-    "bizverify-tools-api-openapi.yml",
-    "bizverify-verification-api-openapi.yml"
+    "_original/bizverify-openapi.json"
   ],
   "outputs": [
     "bizverify-account-api-openapi.yml",
@@ -26,16 +18,28 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "bizverify-account-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bizverify-auth-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bizverify-billing-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bizverify-entities-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bizverify-meta-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bizverify-public-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bizverify-search-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bizverify-tools-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bizverify-verification-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "bizverify-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bizverify-openapi.json: declared missing tag: Account",
+    "bizverify-openapi.json: declared missing tag: Auth",
+    "bizverify-openapi.json: declared missing tag: Billing",
+    "bizverify-openapi.json: declared missing tag: Entities",
+    "bizverify-openapi.json: declared missing tag: Meta",
+    "bizverify-openapi.json: declared missing tag: Public",
+    "bizverify-openapi.json: declared missing tag: Search",
+    "bizverify-openapi.json: declared missing tag: Tools",
+    "bizverify-openapi.json: declared missing tag: Verification",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "bizverify-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bizverify-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bizverify-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bizverify-entities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bizverify-meta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bizverify-public-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bizverify-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bizverify-tools-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bizverify-verification-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

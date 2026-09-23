@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: BizVerify Tools API
-  description: Business entity verification API. Verify company registrations, search business entities,
-    and check good standing across US states and international jurisdictions. Authenticate with an API
-    key via the X-API-Key header.
+  description: Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.
   version: 1.0.0
 tags:
 - name: Tools
@@ -14,8 +12,7 @@ paths:
       summary: OpenAI function calling tool definitions
       tags:
       - Tools
-      description: Returns BizVerify tool definitions in OpenAI function calling format. Use these to
-        register BizVerify tools with any OpenAI-compatible model.
+      description: Returns BizVerify tool definitions in OpenAI function calling format. Use these to register BizVerify tools with any OpenAI-compatible model.
       responses:
         '200':
           description: Default Response
@@ -25,8 +22,7 @@ paths:
       summary: Anthropic tool use definitions
       tags:
       - Tools
-      description: Returns BizVerify tool definitions in Anthropic tool use format. Use these to register
-        BizVerify tools with any Anthropic-compatible model.
+      description: Returns BizVerify tool definitions in Anthropic tool use format. Use these to register BizVerify tools with any Anthropic-compatible model.
       responses:
         '200':
           description: Default Response

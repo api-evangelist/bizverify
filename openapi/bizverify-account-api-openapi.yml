@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: BizVerify Account API
-  description: Business entity verification API. Verify company registrations, search business entities,
-    and check good standing across US states and international jurisdictions. Authenticate with an API
-    key via the X-API-Key header.
+  description: Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.
   version: 1.0.0
 tags:
 - name: Account
@@ -13,8 +11,7 @@ paths:
       operationId: getAccount
       tags:
       - Account
-      description: Get your account details including email, plan, credit balance, and all API keys. Use
-        this to check your current credit balance before making API calls.
+      description: Get your account details including email, plan, credit balance, and all API keys. Use this to check your current credit balance before making API calls.
       security:
       - apiKey: []
       - bearerAuth: []
@@ -114,12 +111,13 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Get account
+      x-summary-source: derived
     patch:
       operationId: updateEmail
       tags:
       - Account
-      description: Update your account email address. Sets email_verified to false and sends a verification
-        email to the new address. You must re-verify before using credit-consuming endpoints.
+      description: Update your account email address. Sets email_verified to false and sends a verification email to the new address. You must re-verify before using credit-consuming endpoints.
       requestBody:
         required: true
         content:
@@ -257,13 +255,14 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Update email
+      x-summary-source: derived
   /v1/account/usage:
     get:
       operationId: getUsageStats
       tags:
       - Account
-      description: Get API usage statistics for your account, broken down by day, endpoint, and jurisdiction.
-        Useful for monitoring consumption and identifying usage patterns.
+      description: Get API usage statistics for your account, broken down by day, endpoint, and jurisdiction. Useful for monitoring consumption and identifying usage patterns.
       parameters:
       - schema:
           default: 30
@@ -307,13 +306,14 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Get usage stats
+      x-summary-source: derived
   /v1/account/data-export:
     get:
       operationId: getDataExport
       tags:
       - Account
-      description: Export all your account data including profile, API keys, credit transactions, verification
-        jobs, and usage statistics (GDPR right to data portability).
+      description: Export all your account data including profile, API keys, credit transactions, verification jobs, and usage statistics (GDPR right to data portability).
       security:
       - apiKey: []
       - bearerAuth: []
@@ -347,13 +347,14 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Get data export
+      x-summary-source: derived
   /v1/account/keys:
     post:
       operationId: createApiKey
       tags:
       - Account
-      description: Create a new API key with a descriptive label. The full key is returned only once —
-        store it securely. You can create multiple keys for different environments or integrations.
+      description: Create a new API key with a descriptive label. The full key is returned only once — store it securely. You can create multiple keys for different environments or integrations.
       requestBody:
         required: true
         content:
@@ -425,13 +426,14 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Create api key
+      x-summary-source: derived
   /v1/account/keys/{keyId}:
     delete:
       operationId: revokeApiKey
       tags:
       - Account
-      description: Revoke an API key immediately. The key will no longer authenticate requests. This action
-        is irreversible.
+      description: Revoke an API key immediately. The key will no longer authenticate requests. This action is irreversible.
       parameters:
       - schema:
           type: string
@@ -517,6 +519,8 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Revoke api key
+      x-summary-source: derived
 components:
   securitySchemes:
     apiKey:

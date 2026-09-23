@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: BizVerify Verification API
-  description: Business entity verification API. Verify company registrations, search business entities,
-    and check good standing across US states and international jurisdictions. Authenticate with an API
-    key via the X-API-Key header.
+  description: Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.
   version: 1.0.0
 tags:
 - name: Verification
@@ -13,13 +11,7 @@ paths:
       operationId: verifyBusiness
       tags:
       - Verification
-      description: 'Verify a business entity by name in a specific jurisdiction. Returns verification
-        results synchronously if available within timeout, or a job ID for async retrieval via GET /v1/verify/status/:jobId.
-        Charges credits based on tier: quick (1 credit), deep (15 credits), deep + force_refresh (25 credits).
-        The response includes `full_verification_available` indicating whether deep verification is supported
-        for the jurisdiction. When deep is not available, a `reason` object is returned. When webhook_url
-        is provided, the result is delivered as a POST request to that URL once the async job completes,
-        fails, or is refunded.'
+      description: 'Verify a business entity by name in a specific jurisdiction. Returns verification results synchronously if available within timeout, or a job ID for async retrieval via GET /v1/verify/status/:jobId. Charges credits based on tier: quick (1 credit), deep (15 credits), deep + force_refresh (25 credits). The response includes `full_verification_available` indicating whether deep verification is supported for the jurisdiction. When deep is not available, a `reason` object is returned. When webhook_url is provided, the result is delivered as a POST request to that URL once the async job completes, fails, or is refunded.'
       requestBody:
         required: true
         content:
@@ -51,23 +43,17 @@ paths:
                   - other
                 verification_level:
                   default: quick
-                  description: 'Verification tier: "quick" (1 credit) returns existence + status. "deep"
-                    (15 credits) returns full entity details including officers, registered agent, formation
-                    date, and filing history. Deep is only available in a subset of jurisdictions; requesting
-                    deep where unavailable returns a quick result with a reason.'
+                  description: 'Verification tier: "quick" (1 credit) returns existence + status. "deep" (15 credits) returns full entity details including officers, registered agent, formation date, and filing history. Deep is only available in a subset of jurisdictions; requesting deep where unavailable returns a quick result with a reason.'
                   type: string
                   enum:
                   - quick
                   - deep
                 force_refresh:
                   default: false
-                  description: 'If true, returns the most current result instead of a previously stored
-                    one. Applies to deep verification only (cost: 25 credits instead of 15); ignored on
-                    quick verifications.'
+                  description: 'If true, returns the most current result instead of a previously stored one. Applies to deep verification only (cost: 25 credits instead of 15); ignored on quick verifications.'
                   type: boolean
                 webhook_url:
-                  description: Optional URL to receive webhook notifications when the async job completes,
-                    fails, or is refunded. Must be a publicly reachable http(s) URL.
+                  description: Optional URL to receive webhook notifications when the async job completes, fails, or is refunded. Must be a publicly reachable http(s) URL.
                   type: string
                   format: uri
               required:
@@ -80,9 +66,7 @@ paths:
         in: header
         name: idempotency-key
         required: false
-        description: Optional key to make this request idempotent. Retries carrying the same key replay
-          the original response instead of charging again; a concurrent retry while the first is still
-          processing returns 409 IDEMPOTENCY_CONFLICT. Max 128 characters.
+        description: Optional key to make this request idempotent. Retries carrying the same key replay the original response instead of charging again; a concurrent retry while the first is still processing returns 409 IDEMPOTENCY_CONFLICT. Max 128 characters.
       security:
       - apiKey: []
       callbacks:
@@ -161,21 +145,18 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: 'Job status: "completed" (sync result) or "pending" (async — poll via
-                      GET /v1/verify/status/:jobId)'
+                    description: 'Job status: "completed" (sync result) or "pending" (async — poll via GET /v1/verify/status/:jobId)'
                   verification_level:
                     type: string
                     enum:
                     - quick
                     - deep
-                    description: The tier at which verification was performed. May differ from the requested
-                      level if deep was requested but not available for this jurisdiction.
+                    description: The tier at which verification was performed. May differ from the requested level if deep was requested but not available for this jurisdiction.
                   full_verification_available:
                     type: boolean
                     description: Whether deep verification is available for this jurisdiction
                   reason:
-                    description: Present when full_verification_available is false, explaining the tier
-                      result
+                    description: Present when full_verification_available is false, explaining the tier result
                     type: object
                     properties:
                       code:
@@ -220,21 +201,18 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: 'Job status: "completed" (sync result) or "pending" (async — poll via
-                      GET /v1/verify/status/:jobId)'
+                    description: 'Job status: "completed" (sync result) or "pending" (async — poll via GET /v1/verify/status/:jobId)'
                   verification_level:
                     type: string
                     enum:
                     - quick
                     - deep
-                    description: The tier at which verification was performed. May differ from the requested
-                      level if deep was requested but not available for this jurisdiction.
+                    description: The tier at which verification was performed. May differ from the requested level if deep was requested but not available for this jurisdiction.
                   full_verification_available:
                     type: boolean
                     description: Whether deep verification is available for this jurisdiction
                   reason:
-                    description: Present when full_verification_available is false, explaining the tier
-                      result
+                    description: Present when full_verification_available is false, explaining the tier result
                     type: object
                     properties:
                       code:
@@ -318,13 +296,14 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Verify business
+      x-summary-source: derived
   /v1/verify/status/{jobId}:
     get:
       operationId: getVerificationStatus
       tags:
       - Verification
-      description: Check the status of an async verification job. Poll this endpoint after POST /v1/verify
-        returns status "pending" with a job_id. Returns the full verification result once the job completes.
+      description: Check the status of an async verification job. Poll this endpoint after POST /v1/verify returns status "pending" with a job_id. Returns the full verification result once the job completes.
       parameters:
       - schema:
           type: string
@@ -364,6 +343,8 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Get verification status
+      x-summary-source: derived
 components:
   securitySchemes:
     apiKey:

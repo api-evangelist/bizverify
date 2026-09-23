@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: BizVerify Public API
-  description: Business entity verification API. Verify company registrations, search business entities,
-    and check good standing across US states and international jurisdictions. Authenticate with an API
-    key via the X-API-Key header.
+  description: Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.
   version: 1.0.0
 tags:
 - name: Public
@@ -13,9 +11,7 @@ paths:
       operationId: getConfig
       tags:
       - Public
-      description: Get public configuration including supported jurisdictions, credit pricing, available
-        features, and API status. No authentication required. Use this to discover supported jurisdictions
-        and understand credit costs before making API calls.
+      description: Get public configuration including supported jurisdictions, credit pricing, available features, and API status. No authentication required. Use this to discover supported jurisdictions and understand credit costs before making API calls.
       responses:
         '200':
           description: Default Response
@@ -297,16 +293,19 @@ paths:
                 - legal
                 - docs
                 additionalProperties: false
+      summary: Get config
+      x-summary-source: derived
   /v1/openapi.json:
     get:
       operationId: getOpenApiSpec
       tags:
       - Public
-      description: Download the OpenAPI 3.1 specification as JSON. Use this to generate client SDKs or
-        explore the API schema programmatically.
+      description: Download the OpenAPI 3.1 specification as JSON. Use this to generate client SDKs or explore the API schema programmatically.
       responses:
         '200':
           description: Default Response
+      summary: Get open api spec
+      x-summary-source: derived
 components:
   securitySchemes:
     apiKey:

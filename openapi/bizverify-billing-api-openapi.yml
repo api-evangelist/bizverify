@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: BizVerify Billing API
-  description: Business entity verification API. Verify company registrations, search business entities,
-    and check good standing across US states and international jurisdictions. Authenticate with an API
-    key via the X-API-Key header.
+  description: Business entity verification API. Verify company registrations, search business entities, and check good standing across US states and international jurisdictions. Authenticate with an API key via the X-API-Key header.
   version: 1.0.0
 tags:
 - name: Billing
@@ -13,8 +11,7 @@ paths:
       operationId: getBilling
       tags:
       - Billing
-      description: Get your current credit balance, available credit packages for purchase, and recent
-        transaction history. Supports pagination for transaction history via limit and offset query parameters.
+      description: Get your current credit balance, available credit packages for purchase, and recent transaction history. Supports pagination for transaction history via limit and offset query parameters.
       parameters:
       - schema:
           default: 50
@@ -81,14 +78,14 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Get billing
+      x-summary-source: derived
   /v1/billing/purchase:
     post:
       operationId: purchaseCredits
       tags:
       - Billing
-      description: Create a Stripe checkout session to purchase a credit package. Returns a Stripe URL
-        to redirect the user to for payment. Credits are added to your balance automatically after successful
-        payment via webhook.
+      description: Create a Stripe checkout session to purchase a credit package. Returns a Stripe URL to redirect the user to for payment. Credits are added to your balance automatically after successful payment via webhook.
       requestBody:
         required: true
         content:
@@ -175,6 +172,8 @@ paths:
                 required:
                 - error
                 additionalProperties: false
+      summary: Purchase credits
+      x-summary-source: derived
 components:
   securitySchemes:
     apiKey:
