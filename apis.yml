@@ -30,11 +30,10 @@ specificationVersion: '0.23'
 tags:
   - Business Verification
   - KYB
-  - Know Your Business
   - Entity Verification
   - Compliance
   - MCP
-  - agent-native
+  - Agent-Native
   - Developer Tools
 tags_raw:
   - Business Verification
@@ -45,6 +44,7 @@ tags_raw:
   - MCP
   - Agent-native
   - Developer Tools
+  - agent-native
 apis:
 - name: BizVerify MCP Server
   description: >-
@@ -56,7 +56,7 @@ apis:
   baseURL: https://api.bizverify.co/mcp
   tags:
   - MCP
-  - agent-native
+  - Agent-Native
   - Business Verification
   - KYB
   tags_raw:
@@ -64,6 +64,7 @@ apis:
   - Agent-native
   - Business Verification
   - KYB
+  - agent-native
   properties:
   - type: MCPServer
     url: https://api.bizverify.co/mcp
