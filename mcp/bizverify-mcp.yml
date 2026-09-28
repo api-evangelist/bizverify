@@ -16,22 +16,42 @@ deployment:
 tools_count: 9
 tools:
 - name: get_config
-  description: ''
+  description: 'Returns BizVerify''s public configuration as readable text: active US and international
+    jurisdictions, per-operation credit costs, the free-tier allowance, credit packages with pricing,
+    feature flags, and documentation/legal links. Free and'
 - name: list_jurisdictions
-  description: ''
+  description: Lists every registered jurisdiction with its code, active/inactive status, and supported
+    capabilities — search, entity lookup, quick verification, and deep verification. Free and requires
+    no authentication. Use it to confirm a state or coun
 - name: verify_business
-  description: ''
+  description: Confirm a specific, named business in one jurisdiction — the PRIMARY tool whenever the
+    user wants to verify, check, confirm, or look up a company's existence, status, good standing, or
+    details (e.g. "verify Acme LLC in Delaware", "is Acme r
 - name: search_entities
-  description: ''
+  description: Discover candidate businesses when the exact entity is UNKNOWN — a listing/discovery tool,
+    NOT a verification tool. Use only when the user wants to browse or list multiple companies matching
+    a partial or fuzzy name, or does not yet know whi
 - name: check_job_status
-  description: ''
+  description: Poll a long-running (async) verification job created by verify_business. Returns the full
+    verification result once complete, a failure reason if it failed, or a "still processing" status to
+    poll again. Free — no credits charged — but requir
 - name: get_entity
-  description: ''
+  description: Fetch a previously verified business entity from BizVerify's cache by its ID — returns
+    name, jurisdiction, status, type, good-standing, formation date, registered agent, and the number
+    of snapshots on record. Free and read-only; does NOT fe
 - name: get_entity_history
-  description: ''
+  description: Returns the chronological verification snapshots recorded for an entity — each with a timestamp,
+    name, and status — newest first, with pagination. Costs 5 credits and requires authentication. Use
+    it to see how a company's status or details
 - name: get_account
-  description: ''
+  description: 'Returns your BizVerify account summary: email and verification status, plan, current credit
+    balance, member-since date, and your active and revoked API keys. Free and read-only; requires authentication.
+    Use it to check your remaining credit'
 - name: purchase_credits
-  description: ''
+  description: 'Starts a credit purchase: creates a Stripe checkout session for the chosen package and
+    returns a payment URL to present to the user. Does NOT charge immediately and does NOT add credits
+    until the user completes payment — credits are then ad'
 tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
