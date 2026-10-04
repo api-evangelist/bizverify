@@ -201,6 +201,9 @@ apis:
   - type: SignUp
     url: https://bizverify.co
 common:
+  - type: CapabilityMap
+    url: capabilities/bizverify-capability-edges.yml
+    name: BizVerify Business Capability Map
   - type: IssueTracker
     url: https://github.com/BizVerify/bizverify-mcp/issues
   - type: License
