@@ -1,30 +1,28 @@
-# Kin Score artifact — bizverify — 2026-09-01T210448
+# Kin Score artifact — bizverify — 2026-09-22T213221
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: bizverify
-  schema_version: 0.18.0
-  scored_at: '2026-09-01'
-  run_ts: 2026-09-01T210448
-  composite: 30.6
+  schema_version: 0.22.0
+  scored_at: '2026-09-22'
+  run_ts: 2026-09-22T213221
+  composite: 29.4
   band: thin
   facets:
     discoverability: 77.8
-    contract_quality: 47.8
-    governance: 0.0
+    contract_quality: 46.0
+    contract_governance: 0.0
     operational_transparency: 5.3
     developer_ergonomics: 16.7
-    commercial_clarity: 34.2
-    contract_governance: 0.0
     access_clarity: 34.2
   agent_readiness:
-    score: 29.0
+    score: 34.2
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: false
       reversibility_documented: false
-      mcp_server: documented
+      mcp_server: verified
       auth_clarity: bearer
       idempotency: verified
       error_semantics: false
@@ -41,8 +39,9 @@ kin_score:
       dynamic_client_registration: false
       agentic_commerce: false
   provenance:
+    mcp: first-party
     contracts:
       total: 9
       derived: 0
       coverage: 0.0
-      callable: 100.0
+      callable: 0.0
