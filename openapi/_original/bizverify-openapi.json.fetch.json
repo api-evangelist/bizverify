@@ -1,0 +1,12 @@
+{
+ "url": "https://api.bizverify.co/v1/openapi.json",
+ "requested_url": "https://api.bizverify.co/v1/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 41601,
+ "sha256": "47b91ca0738400bf31f1ff27e4b7dd56c06fa991c144d54a7c4a6e497e9ff0cd",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
