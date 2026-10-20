@@ -18,39 +18,55 @@ tools:
 - name: get_config
   description: 'Returns BizVerify''s public configuration as readable text: active US and international
     jurisdictions, per-operation credit costs, the free-tier allowance, credit packages with pricing,
-    feature flags, and documentation/legal links. Free and'
+    feature flags, and documentation/legal links. Free and requires no authentication. Call this first
+    to discover what jurisdictions are supported and what each operation costs before verifying.'
 - name: list_jurisdictions
   description: Lists every registered jurisdiction with its code, active/inactive status, and supported
     capabilities — search, entity lookup, quick verification, and deep verification. Free and requires
-    no authentication. Use it to confirm a state or coun
+    no authentication. Use it to confirm a state or country is supported and which verification tiers
+    it offers before calling verify_business or search_entities.
 - name: verify_business
-  description: Confirm a specific, named business in one jurisdiction — the PRIMARY tool whenever the
-    user wants to verify, check, confirm, or look up a company's existence, status, good standing, or
-    details (e.g. "verify Acme LLC in Delaware", "is Acme r
+  description: 'Confirm a specific, named business in one jurisdiction — the PRIMARY tool whenever the
+    user wants to verify, check, confirm, or look up a company''s existence, status, good standing, or
+    details (e.g. "verify Acme LLC in Delaware", "is Acme registered in FL?", "I need to verify a company
+    in Delaware"). If the user has verification intent but has not given the exact company name, ASK them
+    for the name and use THIS tool — do NOT fall back to search_entities. Two tiers: quick (1 credit)
+    returns existence + status + good-standing. Deep (15 credits, or 25 with force_refresh) adds entity
+    type, formation date, registered agent, officers, principal address, and filing history. Deep is available
+    in a subset of jurisdictions; requesting deep where unavailable returns a quick result with a reason.
+    Requires authentication. A completed verification deducts credits whether or not the business is found
+    — a confirmed no-match is a result. Calls that cannot produce an answer (source unavailable or timed
+    out) are refunded.'
 - name: search_entities
   description: Discover candidate businesses when the exact entity is UNKNOWN — a listing/discovery tool,
     NOT a verification tool. Use only when the user wants to browse or list multiple companies matching
-    a partial or fuzzy name, or does not yet know whi
+    a partial or fuzzy name, or does not yet know which specific entity they mean. If the user can name
+    one specific company they want to confirm or check, use verify_business instead (ask them for the
+    name first if needed). Costs 2 credits per jurisdiction searched and requires authentication.
 - name: check_job_status
   description: Poll a long-running (async) verification job created by verify_business. Returns the full
     verification result once complete, a failure reason if it failed, or a "still processing" status to
-    poll again. Free — no credits charged — but requir
+    poll again. Free — no credits charged — but requires authentication. Pass the job_id from the verify_business
+    async response.
 - name: get_entity
   description: Fetch a previously verified business entity from BizVerify's cache by its ID — returns
     name, jurisdiction, status, type, good-standing, formation date, registered agent, and the number
-    of snapshots on record. Free and read-only; does NOT fe
+    of snapshots on record. Free and read-only; does NOT fetch a fresh live result (use verify_business
+    with force_refresh for live data). Requires authentication. Pass an entity_id returned by a prior
+    verify_business or search_entities call.
 - name: get_entity_history
   description: Returns the chronological verification snapshots recorded for an entity — each with a timestamp,
     name, and status — newest first, with pagination. Costs 5 credits and requires authentication. Use
-    it to see how a company's status or details
+    it to see how a company's status or details have changed over time.
 - name: get_account
   description: 'Returns your BizVerify account summary: email and verification status, plan, current credit
     balance, member-since date, and your active and revoked API keys. Free and read-only; requires authentication.
-    Use it to check your remaining credit'
+    Use it to check your remaining credit balance before running paid verifications.'
 - name: purchase_credits
   description: 'Starts a credit purchase: creates a Stripe checkout session for the chosen package and
     returns a payment URL to present to the user. Does NOT charge immediately and does NOT add credits
-    until the user completes payment — credits are then ad'
+    until the user completes payment — credits are then added automatically. Requires authentication.
+    Packages: credits_100, credits_500, credits_2000, credits_10000 (see get_config for current prices).'
 tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
 descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
